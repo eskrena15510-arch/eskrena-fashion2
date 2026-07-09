@@ -1,171 +1,109 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MGstor | متجر الهدايا والإكسسوارات</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGstor | متجر الهدايا والإكسسوارات</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
-
-<div class="logo">
-🛍️ MGstor
-</div>
-
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#products">المنتجات</a>
-<a href="#about">من نحن</a>
-<a href="#contact">تواصل</a>
-</nav>
-
+    <div class="logo">🛍️ MGstor</div>
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="#about">من نحن</a>
+        <a href="#contact">تواصل معنا</a>
+    </nav>
 </header>
 
 <section class="hero">
-
-<h1>مرحبًا بك في MGstor</h1>
-
-<p>
-أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار.
-</p>
-
-<a class="btn" href="https://wa.me/201143343170">
-اطلب الآن عبر واتساب
-</a>
-
+    <h1>مرحبًا بك في MGstor</h1>
+    <p>أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار وأعلى جودة.</p>
+    <a class="btn" href="#products">تصفح المنتجات الآن</a>
 </section>
 
 <section id="products" class="products">
+    <div class="card" onclick="openProductModal('اسوره ايه الكرسي', 120, 'IMG_2822.jpeg', 'إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.')">
+        <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
+        <h3>اسوره ايه الكرسي</h3>
+        <p class="price">120 جنيه</p>
+        <button onclick="event.stopPropagation(); addToCart('اسوره ايه الكرسي', 120)">أضف للسلة</button>
+    </div>
 
-<div class="card">
+    <div class="card" onclick="openProductModal('انسيال فان كليف', 150, 'انسيال فان كليڤ.JPG', 'انسيال فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية، يضفي لمسة ساحرة على إطلالتك اليومية ومقاوم لتغير اللون.')">
+        <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
+        <h3>انسيال فان كليف</h3>
+        <p class="price">150 جنيه</p>
+        <button onclick="event.stopPropagation(); addToCart('انسيال فان كليف', 150)">أضف للسلة</button>
+    </div>
 
-<img src="IMG_2822.jpeg" alt="">
+    <div class="card" onclick="openProductModal('انسيال حرفك استلس', 150, 'IMG_2823.jpeg', 'انسيال مصنوع من مادة الاستانلس ستيل الأصلية المقاومة للصدأ، يمكنك اختيار حرفك المفضل ليأتي محفوراً بشكل أنيق وعصري.')">
+        <img src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
+        <h3>انسيال حرفك استلس</h3>
+        <p class="price">150 جنيه</p>
+        <button onclick="event.stopPropagation(); addToCart('انسيال حرفك استلس', 150)">أضف للسلة</button>
+    </div>
 
-<h3>اسوره ايه الكرسي</h3>
-
-<p>120 جنيه</p>
-
-<button onclick="addToCart('هدية مميزة')">
-أضف للسلة
-</button>
-
-</div>
-
-<div class="card">
-
-<img src="انسيال فان كليڤ.JPG" alt="">
-
-<h3>انسيال فان كليف  </h3>
-
-<p>150جنيه</p>
-
-<button onclick="addToCart('إكسسوار شيك')">
-أضف للسلة
-</button>
-
-</div>
-
-<div class="card">
-
-<img src="IMG_2823.jpeg" alt="">
-
-<h3>انسيال حرفك استلس  </h3>
-
-<p>150 جنيه</p>
-
-<button onclick="addToCart('بوكس هدايا')">
-أضف للسلة
-</button>
-
-</div>
-<div class="card">
-
-<img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="">
-
-<h3>خاتم (أنت عمري)</h3>
-
-<p>250 جنيه</p>
-
-<button onclick="addToCart('خاتم (أنت عمري)')">
-أضف للسلة
-</button>
-
-</div>
+    <div class="card" onclick="openProductModal('خاتم (أنت عمري)', 250, 'e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg', 'خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي أصيل، هدية رومانسية مثالية للتعبير عن مشاعرك لمن تحب.')">
+        <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
+        <h3>خاتم (أنت عمري)</h3>
+        <p class="price">250 جنيه</p>
+        <button onclick="event.stopPropagation(); addToCart('خاتم (أنت عمري)', 250)">أضف للسلة</button>
+    </div>
 </section>
 
-<div class="cart-box" style="text-align:center;margin:40px;">
-
-<button class="cart-btn" onclick="toggleCart()">
-
-🛒 السلة
-(<span id="cart-count">0</span>)
-
-</button>
-
-<div id="cart" class="cart">
-
-<h3>🛒 سلة المشتريات</h3>
-
-<ul id="cart-items">
-
-</ul>
-
-<button onclick="toggleCart()">
-
-إغلاق
-
-</button>
-
+<div id="product-modal" class="modal hidden" onclick="closeProductModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-modal" onclick="closeProductModal()">&times;</span>
+        <img id="modal-img" src="" alt="">
+        <h2 id="modal-title"></h2>
+        <p id="modal-price" class="modal-price"></p>
+        <p id="modal-desc" class="modal-desc"></p>
+        <button id="modal-add-btn" class="modal-add-btn">أضف إلى السلة 🛒</button>
+    </div>
 </div>
 
+<div class="cart-box">
+    <button class="cart-btn" onclick="toggleCart()">
+        🛒 السلة (<span id="cart-count">0</span>)
+    </button>
+
+    <div id="cart" class="cart hidden">
+        <h3>🛒 سلة المشتريات</h3>
+        <ul id="cart-items">
+            </ul>
+        <div class="cart-total">
+            إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
+        </div>
+        
+        <div id="checkout-form" class="checkout-form">
+            <h4>📋 بيانات الشحن والتوصيل</h4>
+            <input type="text" id="client-name" placeholder="الاسم الكامل" required>
+            <input type="tel" id="client-phone" placeholder="رقم الهاتف (واتساب)" required>
+            <input type="text" id="client-address" placeholder="العنوان بالتفصيل (الشارع / الدور / الشقة)" required>
+            <input type="text" id="client-city" placeholder="المحافظة" required>
+            <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال الطلب عبر واتساب 💬</button>
+        </div>
+        
+        <button class="close-btn" onclick="toggleCart()">إغلاق السلة</button>
+    </div>
 </div>
 
 <section id="about">
-
-<h2 style="text-align:center;">
-من نحن
-</h2>
-
-<p style="text-align:center;padding:20px;">
-
-MGstor متجر متخصص في بيع الهدايا والإكسسوارات بأفضل الأسعار والجودة.
-
-</p>
-
+    <h2>من نحن</h2>
+    <p>MGstor متجر متخصص في بيع الهدايا والإكسسوارات الراقية التي تضفي لمسة جمالية على إطلالتك، نوفر لكم أفضل الأسعار والجودة العالية مع خدمة توصيل سريعة.</p>
 </section>
 
 <footer id="contact">
-
-<h3>MGstor</h3>
-
-<p>
-
-للطلب والاستفسار
-
-</p>
-
-<a class="btn" href="https://wa.me/201143343170">
-
-راسلنا على واتساب
-
-</a>
-
-<p style="margin-top:20px;">
-
-© 2026 MGstor
-
-</p>
-
+    <h3>MGstor</h3>
+    <p>للطلب والاستفسار المباشر</p>
+    <a class="btn" href="https://wa.me/201143343170" target="_blank">راسلنا على واتساب</a>
+    <p style="margin-top:20px; font-size: 0.9rem; color: #bbb;">© 2026 MGstor. جميع الحقوق محفوظة.</p>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
