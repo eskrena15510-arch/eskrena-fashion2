@@ -28,49 +28,63 @@
 <!-- قسم المنتجات -->
 <section id="products" class="products">
     
-    <!-- المنتج 1 -->
+    <!-- المنتج 1 (صورة واحدة) -->
     <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
-        <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
+        <div class="slider-container">
+            <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
+        </div>
         <h3>اسوره ايه الكرسي</h3>
         <p class="price">120 جنيه</p>
         <p class="product-description">إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.</p>
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 2 -->
+    <!-- المنتج 2 (صورة واحدة) -->
     <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
-        <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
+        <div class="slider-container">
+            <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
+        </div>
         <h3>انسيال فان كليف</h3>
         <p class="price">150 جنيه</p>
         <p class="product-description">انسيال فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية، يضفي لمسة ساحرة على إطلالتك اليومية ومقاوم لتغير اللون.</p>
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 3 -->
+    <!-- المنتج 3 (صورة واحدة) -->
     <div class="card" onclick="addToCart('انسيال حرفك استلس', 150)">
-        <img src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
+        <div class="slider-container">
+            <img src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
+        </div>
         <h3>انسيال حرفك استلس</h3>
         <p class="price">150 جنيه</p>
         <p class="product-description">انسيال مصنوع من مادة الاستانلس ستيل الأصلية المقاومة للصدأ، يمكنك اختيار حرفك المفضل ليأتي محفوراً بشكل أنيق وعصري.</p>
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 4 -->
+    <!-- المنتج 4 (صورة واحدة) -->
     <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
-        <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
+        <div class="slider-container">
+            <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
+        </div>
         <h3>خاتم (أنت عمري)</h3>
         <p class="price">250 جنيه</p>
         <p class="product-description">خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي أصيل، هدية رومانسية مثالية للتعبير عن مشاعرك لمن تحب.</p>
         <button>أضف للسلة</button>
     </div>
 
-    <!-- ✨ المنتج الجديد 5: طقم اسكوير استلس بيور ✨ -->
+    <!-- ✨ المنتج 5 (بأكثر من صورة يقلب العميل بينها) ✨ -->
     <div class="card" onclick="addToCart('طقم اسكوير استلس بيور', 320)">
-        <!-- تنويه: غير اسم الصورة square-set.jpg لاسم ملف صورتك الحقيقي -->
-        <img src="square-set.jpg" alt="طقم اسكوير استلس بيور">
+        <div class="slider-container">
+            <!-- ضع هنا أسماء ملفات الصور الحقيقية الخاصة بالطقم -->
+            <img id="img-product-5" src="square1.jpg" alt="طقم اسكوير استلس بيور">
+            
+            <!-- أزرار التقليب المباشر -->
+            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.jpg', 'square2.jpg', 'square3.jpg'], -1)">&#10094;</button>
+            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.jpg', 'square2.jpg', 'square3.jpg'], 1)">&#10095;</button>
+        </div>
         <h3>طقم اسكوير استلس بيور</h3>
         <p class="price">320 جنيه</p>
-        <p class="product-description">طقم كامل بتصميم مربع (اسكوير) راقي وعصري، مصنوع من الاستانلس ستيل البيور النقي المقاوم تماماً للصدأ وتغير اللون، يمنحك بريقاً دائم الإشراق.</p>
+        <p class="product-description">طقم كامل بتصميم مربع (اسكوير) راقي وعصري، مصنوع من الاستانلس ستيل البيور النقي المقاوم تماماً للصدأ وتغير اللون.</p>
         <button>أضف للسلة</button>
     </div>
 
@@ -91,7 +105,7 @@
             إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
         </div>
         
-        <!-- استمارة بيانات العميل داخل الموقع -->
+        <!-- استمارة بيانات العميل -->
         <div id="checkout-form" class="checkout-form">
             <h4>📋 بيانات الشحن والتوصيل</h4>
             <input type="text" id="client-name" placeholder="الاسم الكامل" required>
@@ -112,9 +126,8 @@
 
 <footer id="contact">
     <h3>MGstor</h3>
-    <p>للطلب والاستفسار المباشر</p>
     <a class="btn" href="https://wa.me/201143343170" target="_blank">راسلنا على واتساب</a>
-    <p style="margin-top:20px; font-size: 0.9rem; color: #bbb;">© 2026 MGstor. جميع الحقوق محفوظة.</p>
+    <p style="margin-top:20px;">© 2026 MGstor</p>
 </footer>
 
 <script src="script.js"></script>
