@@ -90,7 +90,7 @@ function submitOrder() {
         return;
     }
 
-    let phoneNumber = "201143343170";
+    let phoneNumber = "201064031909";
     let message = "🛍️ *طلب جديد من متجر MGstor* 🛍️\n\n";
     message += "👤 *بيانات العميل:*\n";
     message += `- الاسم: ${name}\n- الهاتف: ${phone}\n- العنوان: ${address}\n- المحافظة: ${city}\n\n`;
