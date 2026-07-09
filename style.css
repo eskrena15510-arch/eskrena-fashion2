@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: #ffffff; /* خلفية الصفحة بيضاء بالكامل */
+    color: #000000; /* النصوص باللون الأسود الأساسي */
 }
 
 header {
@@ -16,7 +16,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #e0e0e0; /* خط رمادي خفيف جداً بدل الظل */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -25,24 +25,24 @@ header {
 header .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ff4a5a;
+    color: #000000; /* اللوجو بالأسود */
 }
 
 header nav a {
     text-decoration: none;
-    color: #555;
+    color: #555555;
     margin-right: 20px;
     font-weight: 600;
     transition: color 0.3s;
 }
 
 header nav a:hover {
-    color: #ff4a5a;
+    color: #000000; /* عند مرور الماوس يتحول للأسود الداكن */
 }
 
 .hero {
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-    color: white;
+    background-color: #000000; /* بانر أسود فخم */
+    color: #ffffff; /* نصوص بيضاء داخل البانر */
     text-align: center;
     padding: 80px 20px;
 }
@@ -50,85 +50,139 @@ header nav a:hover {
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    letter-spacing: 1px;
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 25px;
+    color: #cccccc;
 }
 
 .btn {
     display: inline-block;
-    background-color: white;
-    color: #ff4a5a;
+    background-color: #ffffff; /* زر أبيض داخل البانر الأسود */
+    color: #000000;
     padding: 10px 25px;
-    border-radius: 25px;
+    border-radius: 0px; /* زوايا حادة لستايل عصري وأنيق */
     text-decoration: none;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    border: 1px solid #ffffff;
+    transition: all 0.3s;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     padding: 50px 5%;
+    background-color: #ffffff;
 }
 
 .card {
-    background: white;
-    border-radius: 15px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0; /* إطار خفيف بديل للظلال الملونة */
+    border-radius: 0px; /* زوايا حادة متناسقة مع الستايل */
     padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: transform 0.3s;
+    transition: all 0.3s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    border-color: #000000; /* تحديد الكارت بالأسود عند الوقوف عليه */
 }
 
-.card img {
+/* سلايدر الصور داخل الكروت */
+.slider-container {
+    position: relative;
     width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
     margin-bottom: 15px;
 }
 
+.slider-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 0px;
+}
+
+/* أسهم التنقل يمين ويسار باللون الأسود والأبيض */
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0px;
+    transition: background 0.3s;
+}
+
+.slide-btn:hover {
+    background-color: #000000;
+}
+
+.slide-btn.prev { left: 10px; }
+.slide-btn.next { right: 10px; }
+
 .card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.card .price {
+    color: #000000;
+    font-weight: 700;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
-.card .price {
-    color: #ff4a5a;
-    font-weight: 700;
+/* تنسيق وصف المنتج */
+.product-description {
+    font-size: 0.85rem;
+    color: #666666;
+    line-height: 1.6;
     margin-bottom: 15px;
+    padding: 0 5px;
+    text-align: center;
 }
 
+/* أزرار الشراء باللون الأسود بالكامل والكتابة بالأبيض */
 .card button {
-    background-color: #ff4a5a;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+    padding: 12px 20px;
+    border-radius: 0px;
     cursor: pointer;
     font-weight: 600;
     width: 100%;
-    transition: background 0.3s;
+    transition: all 0.3s;
+    margin-top: auto;
+    letter-spacing: 0.5px;
 }
 
 .card button:hover {
-    background-color: #e03e4d;
+    background-color: #ffffff;
+    color: #000000;
 }
 
+/* صندوق السلة العائم باللون الأسود لكي يبرز */
 .cart-box {
     position: fixed;
     bottom: 20px;
@@ -137,38 +191,43 @@ header nav a:hover {
 }
 
 .cart-btn {
-    background: #25d366;
-    color: white;
-    border: none;
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
     padding: 15px 25px;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    border-radius: 0px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+}
+
+.cart-btn:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 .cart {
     position: fixed;
     bottom: 80px;
     left: 20px;
-    background: white;
+    background: #ffffff;
     width: 340px;
     max-height: 500px;
     overflow-y: auto;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    border-radius: 0px;
+    border: 2px solid #000000;
     padding: 20px;
 }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 
 .cart h3 {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid #000000;
     padding-bottom: 10px;
     margin-bottom: 15px;
+    font-size: 1.1rem;
 }
 
 .cart ul {
@@ -182,162 +241,104 @@ header nav a:hover {
     align-items: center;
     margin-bottom: 10px;
     font-size: 0.95rem;
-    background: #fdfdfd;
-    padding: 5px;
-    border-radius: 5px;
+    background: #f9f9f9;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
 }
 
 .cart-total {
     font-weight: bold;
     margin-bottom: 15px;
     text-align: center;
-    border-top: 1px solid #eee;
+    border-top: 2px solid #000000;
     padding-top: 10px;
-    color: #ff4a5a;
+    color: #000000;
+    font-size: 1.1rem;
 }
 
 .checkout-form {
-    background: #f7f7f7;
+    background: #f9f9f9;
     padding: 12px;
-    border-radius: 10px;
+    border: 1px solid #e0e0e0;
     margin-bottom: 15px;
 }
 
 .checkout-form h4 {
     margin-bottom: 10px;
     font-size: 0.95rem;
-    color: #555;
+    color: #000000;
 }
 
 .checkout-form input {
     width: 100%;
     padding: 8px 12px;
     margin-bottom: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 0px;
     font-size: 0.9rem;
     outline: none;
 }
 
-.checkout-form input:focus {
-    border-color: #25d366;
+.checkout-form input:focus { 
+    border-color: #000000; 
 }
 
+/* زر إرسال الطلب عبر واتساب (تركناه أسود متناسق مع الديزاين) */
 .checkout-btn {
-    background: #25d366;
-    color: white;
-    border: none;
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
     width: 100%;
     padding: 12px;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
     font-weight: bold;
     font-size: 0.95rem;
-    transition: background 0.3s;
+    transition: all 0.3s;
 }
 
-.checkout-btn:hover {
-    background: #1ebe57;
+.checkout-btn:hover { 
+    background: #ffffff; 
+    color: #000000;
 }
 
 .close-btn {
-    background: #eee;
-    border: none;
+    background: #ffffff;
+    border: 1px solid #cccccc;
     width: 100%;
     padding: 8px;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
+    transition: all 0.3s;
 }
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-}
-
-#modal-img {
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-#modal-title {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
-
-.modal-price {
-    font-size: 1.2rem;
-    color: #ff4a5a;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.modal-desc {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-.modal-add-btn {
-    background-color: #ff4a5a;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
+.close-btn:hover {
+    background: #f0f0f0;
 }
 
 #about {
-    background: white;
-    padding: 50px 10%;
+    background: #f9f9f9;
+    padding: 60px 10%;
     text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+#about h2 {
+    margin-bottom: 15px;
 }
 
 footer {
-    background: #222;
-    color: white;
+    background: #000000;
+    color: #ffffff;
     text-align: center;
     padding: 40px 20px;
 }
 
 footer .btn {
-    background: #25d366;
-    color: white;
-    margin-top: 15px;
+    background-color: #ffffff;
+    color: #000000;
+}
+footer .btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
 }
