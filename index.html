@@ -2,10 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MGstor | متجر الهدايا والإكسسوارات</title>
+    <title>MGstor | متجر الهدايا</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -14,53 +13,35 @@
     <nav>
         <a href="#">الرئيسية</a>
         <a href="#products">المنتجات</a>
-        <a href="#about">من نحن</a>
-        <a href="#contact">تواصل معنا</a>
     </nav>
 </header>
 
-<section class="hero">
-    <h1>مرحبًا بك في MGstor</h1>
-    <p>أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار وأعلى جودة.</p>
-    <a class="btn" href="#products">تصفح المنتجات الآن</a>
-</section>
-
 <section id="products" class="products">
     <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
-        <div class="slider-container">
-            <img id="img-product-box" src="box1.png" alt="بوكس هدايا MGstor">
-            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
-            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
-        </div>
-        <h3 style="color: #000000;">🎁 بوكس هدايا MGstor</h3>
+        <h3>🎁 بوكس هدايا MGstor</h3>
         <p class="price">600 جنيه</p>
-        <p class="product-description">طقم اسكوير استلس بيور + 4 بورتريهات صغيرة + 1 بورتريه كبير + 3 قطع شوكولاتة فاخرة.</p>
-        <button>أضف العرض للسلة 🛒</button>
+        <p class="product-description">طقم استلس + 4 بورتريهات صغيرة + 1 كبير + 3 شوكولاتة.</p>
+        <button>أضف للسلة 🛒</button>
     </div>
-    </section>
+</section>
 
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="cart-count">0</span>)</button>
     <div id="cart" class="cart hidden">
         <h3>🛒 سلة المشتريات</h3>
         <ul id="cart-items"></ul>
-        <div class="cart-total">إجمالي الحساب: <span id="cart-total-price">0</span> جنيه</div>
-        <div id="checkout-form" class="checkout-form">
-            <h4>📋 بيانات الشحن والتوصيل</h4>
-            <input type="text" id="client-name" placeholder="الاسم الكامل" required>
-            <input type="tel" id="client-phone" placeholder="رقم الهاتف" required>
-            <input type="text" id="client-address" placeholder="العنوان" required>
-            <input type="text" id="client-city" placeholder="المحافظة" required>
-            <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال عبر واتساب 💬</button>
+        <div class="cart-total">الإجمالي: <span id="cart-total-price">0</span> جنيه</div>
+        <div class="checkout-form">
+            <input type="text" id="client-name" placeholder="الاسم">
+            <input type="text" id="client-phone" placeholder="رقم الهاتف">
+            <input type="text" id="client-address" placeholder="العنوان">
+            <input type="text" id="client-city" placeholder="المحافظة">
+            <button class="checkout-btn" onclick="submitOrder()">إرسال الطلب عبر واتساب 💬</button>
         </div>
-        <button class="close-btn" onclick="toggleCart()">إغلاق السلة</button>
+        <button class="close-btn" onclick="toggleCart()">إغلاق</button>
     </div>
 </div>
 
-<footer id="contact">
-    <h3>MGstor</h3>
-    <a class="btn" href="https://wa.me/201064031909" target="_blank">راسلنا على واتساب</a>
-</footer>
 <script src="script.js"></script>
 </body>
 </html>
