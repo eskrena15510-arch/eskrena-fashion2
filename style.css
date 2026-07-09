@@ -2,7 +2,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Cairo,sans-serif;
+    font-family:'Cairo',sans-serif;
 }
 
 body{
@@ -19,6 +19,7 @@ header{
     padding:15px 30px;
     position:sticky;
     top:0;
+    z-index:1000;
 }
 
 .logo{
@@ -30,7 +31,7 @@ header{
 nav a{
     color:#fff;
     text-decoration:none;
-    margin:0 12px;
+    margin:0 10px;
     transition:.3s;
 }
 
@@ -40,22 +41,23 @@ nav a:hover{
 
 .hero{
     background:linear-gradient(135deg,#111,#333);
-    color:white;
+    color:#fff;
     text-align:center;
     padding:80px 20px;
 }
 
 .hero h1{
-    font-size:42px;
+    font-size:45px;
     margin-bottom:15px;
 }
 
 .hero p{
     font-size:20px;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .btn{
+    display:inline-block;
     background:#FFD700;
     color:#111;
     padding:12px 30px;
@@ -95,13 +97,14 @@ nav a:hover{
 
 .card p{
     padding:0 15px 15px;
+    font-weight:bold;
 }
 
 button{
     margin:15px;
     width:calc(100% - 30px);
     background:#111;
-    color:white;
+    color:#fff;
     border:none;
     padding:12px;
     border-radius:10px;
@@ -113,10 +116,71 @@ button:hover{
     color:#111;
 }
 
+.cart-box{
+    text-align:center;
+    margin:40px;
+}
+
+.cart-btn{
+    background:#111;
+    color:#fff;
+    border:none;
+    padding:15px 30px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.cart-btn:hover{
+    background:#FFD700;
+    color:#111;
+}
+
+.cart{
+    display:none;
+    background:#fff;
+    width:90%;
+    max-width:450px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+#cart-items{
+    list-style:none;
+    padding:0;
+}
+
+#cart-items li{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
 footer{
     background:#111;
     color:#fff;
     text-align:center;
     padding:20px;
     margin-top:40px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+}
+
+nav{
+margin-top:15px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.products{
+padding:20px;
+}
+
 }
