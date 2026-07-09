@@ -1,72 +1,56 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MGstor | متجر الهدايا والإكسسوارات</title>
+// ===== MGstor Shopping Cart =====
 
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
+let cart = [];
 
-<body>
+// إضافة منتج للسلة
+function addToCart(productName) {
+    cart.push(productName);
 
-<header>
-<div class="logo">🛍️ MGstor</div>
+    // تحديث عداد السلة
+    document.getElementById("cart-count").textContent = cart.length;
 
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#products">المنتجات</a>
-<a href="#contact">تواصل</a>
-</nav>
-</header>
+    // تحديث قائمة المنتجات داخل السلة
+    const cartItems = document.getElementById("cart-items");
+    cartItems.innerHTML = "";
 
-<section class="hero">
-<h1>مرحبًا بك في MGstor</h1>
+    cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            ${item}
+            <button onclick="removeItem(${index})">❌</button>
+        `;
+        cartItems.appendChild(li);
+    });
 
-<p>أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار.</p>
+    alert("✅ تمت إضافة المنتج إلى السلة");
+}
 
-<a class="btn" href="https://wa.me/201143343170">
-اطلب الآن عبر واتساب
-</a>
+// حذف منتج
+function removeItem(index) {
+    cart.splice(index, 1);
 
-</section>
+    document.getElementById("cart-count").textContent = cart.length;
 
-<section id="products" class="products">
+    const cartItems = document.getElementById("cart-items");
+    cartItems.innerHTML = "";
 
-<div class="card">
-<img src="https://via.placeholder.com/300x250?text=Gift+1">
-<h3>هدية مميزة</h3>
-<p>250 جنيه</p>
-<button onclick="addToCart()">أضف للسلة</button>
-</div>
+    cart.forEach((item, i) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            ${item}
+            <button onclick="removeItem(${i})">❌</button>
+        `;
+        cartItems.appendChild(li);
+    });
+}
 
-<div class="card">
-<img src="https://via.placeholder.com/300x250?text=Gift+2">
-<h3>إكسسوار شيك</h3>
-<p>180 جنيه</p>
-<button onclick="addToCart()">أضف للسلة</button>
-</div>
+// فتح وإغلاق السلة
+function toggleCart() {
+    const cartBox = document.getElementById("cart");
 
-<div class="card">
-<img src="https://via.placeholder.com/300x250?text=Gift+3">
-<h3>بوكس هدايا</h3>
-<p>350 جنيه</p>
-<button onclick="addToCart()">أضف للسلة</button>
-</div>
-
-</section>
-
-<h2 style="text-align:center;margin:20px;">
-🛒 السلة:
-<span id="cart-count">0</span>
-</h2>
-
-<footer id="contact">
-<p>© 2026 MGstor - جميع الحقوق محفوظة</p>
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    if (cartBox.style.display === "block") {
+        cartBox.style.display = "none";
+    } else {
+        cartBox.style.display = "block";
+    }
+}
