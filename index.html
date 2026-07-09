@@ -1,76 +1,105 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MGstor | هدايا وإكسسوارات</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGstor | متجر الهدايا والإكسسوارات</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-    <div class="logo">🎁 MGstor</div>
 
-    <nav>
-        <a href="#">الرئيسية</a>
-        <a href="#products">المنتجات</a>
-        <a href="#about">من نحن</a>
-        <a href="#contact">تواصل</a>
-    </nav>
+<div class="logo">
+🛍️ MGstor
+</div>
+
+<nav>
+
+<a href="#">الرئيسية</a>
+
+<a href="#products">المنتجات</a>
+
+<a href="#about">من نحن</a>
+
+<a href="#contact">تواصل معنا</a>
+
+</nav>
+
 </header>
 
 <section class="hero">
 
-<h1>أفضل الهدايا والإكسسوارات</h1>
+<h1>مرحباً بك في MGstor</h1>
 
 <p>
-اكتشف أحدث المنتجات بأفضل الأسعار.
+أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار.
 </p>
 
-<a href="#products" class="btn">
-تسوق الآن
+<a href="https://wa.me/201143343170" class="btn">
+اطلب عبر واتساب
 </a>
 
 </section>
 
 <section id="products" class="products">
 
-<h2>منتجاتنا</h2>
+<h2>أحدث المنتجات</h2>
 
 <div class="cards">
 
 <div class="card">
-<img src="https://picsum.photos/300?1">
-<h3>بوكس هدايا</h3>
-<p>350 جنيه</p>
-<button onclick="buy()">أضف للسلة</button>
+
+<img src="https://picsum.photos/300/300?1">
+
+<h3>هدية مميزة</h3>
+
+<p>250 جنيه</p>
+
+<button onclick="addCart()">
+أضف للسلة
+</button>
+
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/300?2">
-<h3>سلسلة أنيقة</h3>
+
+<img src="https://picsum.photos/300/300?2">
+
+<h3>ساعة أنيقة</h3>
+
+<p>420 جنيه</p>
+
+<button onclick="addCart()">
+أضف للسلة
+</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://picsum.photos/300/300?3">
+
+<h3>إكسسوار فاخر</h3>
+
 <p>180 جنيه</p>
-<button onclick="buy()">أضف للسلة</button>
-</div>
 
-<div class="card">
-<img src="https://picsum.photos/300?3">
-<h3>ساعة رجالي</h3>
-<p>650 جنيه</p>
-<button onclick="buy()">أضف للسلة</button>
-</div>
+<button onclick="addCart()">
+أضف للسلة
+</button>
 
-<div class="card">
-<img src="https://picsum.photos/300?4">
-<h3>محفظة جلد</h3>
-<p>280 جنيه</p>
-<button onclick="buy()">أضف للسلة</button>
 </div>
 
 </div>
+
+<h3 id="cart">
+السلة : 0
+</h3>
 
 </section>
 
@@ -79,28 +108,33 @@
 <h2>من نحن</h2>
 
 <p>
-MGstor متجر متخصص في الهدايا والإكسسوارات بأفضل جودة وأسعار مناسبة.
+
+MGstor متجر متخصص في بيع الهدايا والإكسسوارات بأفضل جودة وسعر.
+
 </p>
 
 </section>
 
-<section id="contact">
+<footer id="contact">
 
-<h2>تواصل معنا</h2>
+<h3>MGstor</h3>
 
-<a class="whatsapp" href="https://wa.me/201143343170">
-راسلنا على واتساب
+<p>
+
+للطلب والاستفسار عبر واتساب
+
+</p>
+
+<a href="https://wa.me/201143343170">
+
+اضغط هنا للتواصل
+
 </a>
-
-</section>
-
-<footer>
-
-© 2026 MGstor جميع الحقوق محفوظة
 
 </footer>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
