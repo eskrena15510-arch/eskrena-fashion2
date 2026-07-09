@@ -27,48 +27,39 @@
 
 <section id="products" class="products">
     
-    <div class="card" onclick="openProductModal('اسوره ايه الكرسي', 120, 'IMG_2822.jpeg', 'إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.')">
+    <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
         <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
         <h3>اسوره ايه الكرسي</h3>
         <p class="price">120 جنيه</p>
-        <button onclick="event.stopPropagation(); addToCart('اسوره ايه الكرسي', 120)">أضف للسلة</button>
+        <p class="product-description">إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.</p>
+        <button>أضف للسلة</button>
     </div>
 
-    <div class="card" onclick="openProductModal('انسيال فان كليف', 150, 'انسيال فان كليڤ.JPG', 'انسيال فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية، يضفي لمسة ساحرة على إطلالتك اليومية ومقاوم لتغير اللون.')">
+    <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
         <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
         <h3>انسيال فان كليف</h3>
         <p class="price">150 جنيه</p>
-        <button onclick="event.stopPropagation(); addToCart('انسيال فان كليف', 150)">أضف للسلة</button>
+        <p class="product-description">انسيال فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية، يضفي لمسة ساحرة على إطلالتك اليومية ومقاوم لتغير اللون.</p>
+        <button>أضف للسلة</button>
     </div>
 
-    <div class="card" onclick="openProductModal('انسيال حرفك استلس', 150, 'IMG_2823.jpeg', 'انسيال مصنوع من مادة الاستانلس ستيل الأصلية المقاومة للصدأ، يمكنك اختيار حرفك المفضل ليأتي محفوراً بشكل أنيق وعصري.')">
+    <div class="card" onclick="addToCart('انسيال حرفك استلس', 150)">
         <img src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
         <h3>انسيال حرفك استلس</h3>
         <p class="price">150 جنيه</p>
-        <button onclick="event.stopPropagation(); addToCart('انسيال حرفك استلس', 150)">أضف للسلة</button>
+        <p class="product-description">انسيال مصنوع من مادة الاستانلس ستيل الأصلية المقاومة للصدأ، يمكنك اختيار حرفك المفضل ليأتي محفوراً بشكل أنيق وعصري.</p>
+        <button>أضف للسلة</button>
     </div>
 
-    <div class="card" onclick="openProductModal('خاتم (أنت عمري)', 250, 'e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg', 'خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي أصيل، هدية رومانسية مثالية للتعبير عن مشاعرك لمن تحب.')">
+    <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
         <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
         <h3>خاتم (أنت عمري)</h3>
         <p class="price">250 جنيه</p>
-        <button onclick="event.stopPropagation(); addToCart('خاتم (أنت عمري)', 250)">أضف للسلة</button>
+        <p class="product-description">خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي أصيل، هدية رومانسية مثالية للتعبير عن مشاعرك لمن تحب.</p>
+        <button>أضف للسلة</button>
     </div>
 
 </section>
-
-<div id="product-modal" class="modal hidden" onclick="closeProductModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-modal" onclick="closeProductModal()">&times;</span>
-        
-        <img id="modal-img" src="" alt="صورة المنتج">
-        <h2 id="modal-title" style="color: #333; margin-top:15px; font-size: 1.4rem;"></h2>
-        <p id="modal-price" class="modal-price" style="color: #ff4a5a; font-weight: bold; font-size: 1.3rem; margin: 10px 0;"></p>
-        <p id="modal-desc" class="modal-desc" style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; text-align: center;"></p>
-        
-        <button id="modal-add-btn" class="modal-add-btn">أضف إلى السلة 🛒</button>
-    </div>
-</div>
 
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">
