@@ -26,6 +26,7 @@
 </section>
 
 <section id="products" class="products">
+    
     <div class="card" onclick="openProductModal('اسوره ايه الكرسي', 120, 'IMG_2822.jpeg', 'إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.')">
         <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
         <h3>اسوره ايه الكرسي</h3>
@@ -53,15 +54,18 @@
         <p class="price">250 جنيه</p>
         <button onclick="event.stopPropagation(); addToCart('خاتم (أنت عمري)', 250)">أضف للسلة</button>
     </div>
+
 </section>
 
 <div id="product-modal" class="modal hidden" onclick="closeProductModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close-modal" onclick="closeProductModal()">&times;</span>
-        <img id="modal-img" src="" alt="">
-        <h2 id="modal-title"></h2>
-        <p id="modal-price" class="modal-price"></p>
-        <p id="modal-desc" class="modal-desc"></p>
+        
+        <img id="modal-img" src="" alt="صورة المنتج">
+        <h2 id="modal-title" style="color: #333; margin-top:15px;"></h2>
+        <p id="modal-price" class="modal-price" style="color: #ff4a5a; font-weight: bold; font-size: 1.2rem; margin: 10px 0;"></p>
+        <p id="modal-desc" class="modal-desc" style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;"></p>
+        
         <button id="modal-add-btn" class="modal-add-btn">أضف إلى السلة 🛒</button>
     </div>
 </div>
@@ -83,7 +87,7 @@
             <h4>📋 بيانات الشحن والتوصيل</h4>
             <input type="text" id="client-name" placeholder="الاسم الكامل" required>
             <input type="tel" id="client-phone" placeholder="رقم الهاتف (واتساب)" required>
-            <input type="text" id="client-address" placeholder="العنوان بالتفصيل (الشارع / الدور / الشقة)" required>
+            <input type="text" id="client-address" placeholder="العنوان بالتفصيل" required>
             <input type="text" id="client-city" placeholder="المحافظة" required>
             <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال الطلب عبر واتساب 💬</button>
         </div>
@@ -94,14 +98,13 @@
 
 <section id="about">
     <h2>من نحن</h2>
-    <p>MGstor متجر متخصص في بيع الهدايا والإكسسوارات الراقية التي تضفي لمسة جمالية على إطلالتك، نوفر لكم أفضل الأسعار والجودة العالية مع خدمة توصيل سريعة.</p>
+    <p>MGstor متجر متخصص في بيع الهدايا والإكسسوارات الراقية.</p>
 </section>
 
 <footer id="contact">
     <h3>MGstor</h3>
-    <p>للطلب والاستفسار المباشر</p>
     <a class="btn" href="https://wa.me/201143343170" target="_blank">راسلنا على واتساب</a>
-    <p style="margin-top:20px; font-size: 0.9rem; color: #bbb;">© 2026 MGstor. جميع الحقوق محفوظة.</p>
+    <p style="margin-top:20px;">© 2026 MGstor</p>
 </footer>
 
 <script src="script.js"></script>
