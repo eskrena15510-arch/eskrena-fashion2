@@ -25,8 +25,10 @@
     <a class="btn" href="#products">تصفح المنتجات الآن</a>
 </section>
 
+<!-- قسم المنتجات -->
 <section id="products" class="products">
     
+    <!-- المنتج 1 -->
     <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
         <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
         <h3>اسوره ايه الكرسي</h3>
@@ -35,6 +37,7 @@
         <button>أضف للسلة</button>
     </div>
 
+    <!-- المنتج 2 -->
     <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
         <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
         <h3>انسيال فان كليف</h3>
@@ -43,6 +46,7 @@
         <button>أضف للسلة</button>
     </div>
 
+    <!-- المنتج 3 -->
     <div class="card" onclick="addToCart('انسيال حرفك استلس', 150)">
         <img src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
         <h3>انسيال حرفك استلس</h3>
@@ -51,6 +55,7 @@
         <button>أضف للسلة</button>
     </div>
 
+    <!-- المنتج 4 -->
     <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
         <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
         <h3>خاتم (أنت عمري)</h3>
@@ -59,8 +64,19 @@
         <button>أضف للسلة</button>
     </div>
 
+    <!-- ✨ المنتج الجديد 5: طقم اسكوير استلس بيور ✨ -->
+    <div class="card" onclick="addToCart('طقم اسكوير استلس بيور', 320)">
+        <!-- تنويه: غير اسم الصورة square-set.jpg لاسم ملف صورتك الحقيقي -->
+        <img src="square-set.jpg" alt="طقم اسكوير استلس بيور">
+        <h3>طقم اسكوير استلس بيور</h3>
+        <p class="price">320 جنيه</p>
+        <p class="product-description">طقم كامل بتصميم مربع (اسكوير) راقي وعصري، مصنوع من الاستانلس ستيل البيور النقي المقاوم تماماً للصدأ وتغير اللون، يمنحك بريقاً دائم الإشراق.</p>
+        <button>أضف للسلة</button>
+    </div>
+
 </section>
 
+<!-- السلة الثابتة واستمارة الطلب -->
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">
         🛒 السلة (<span id="cart-count">0</span>)
@@ -69,11 +85,13 @@
     <div id="cart" class="cart hidden">
         <h3>🛒 سلة المشتريات</h3>
         <ul id="cart-items">
-            </ul>
+            <!-- المنتجات تظهر هنا تلقائياً -->
+        </ul>
         <div class="cart-total">
             إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
         </div>
         
+        <!-- استمارة بيانات العميل داخل الموقع -->
         <div id="checkout-form" class="checkout-form">
             <h4>📋 بيانات الشحن والتوصيل</h4>
             <input type="text" id="client-name" placeholder="الاسم الكامل" required>
