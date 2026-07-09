@@ -1,6 +1,23 @@
 let cart = [];
 
-// دالة لإضافة منتج للسلة
+// دالة تقليب الصور داخل الكروت
+function changeImage(imgId, imgArray, direction) {
+    const imgElement = document.getElementById(imgId);
+    let currentSrc = imgElement.src.split('/').pop();
+    currentSrc = decodeURIComponent(currentSrc);
+    
+    let currentIndex = imgArray.indexOf(currentSrc);
+    if (currentIndex === -1) currentIndex = 0;
+    
+    currentIndex += direction;
+    
+    if (currentIndex >= imgArray.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = imgArray.length - 1;
+    
+    imgElement.src = imgArray[currentIndex];
+}
+
+// دالة إضافة منتج للسلة
 function addToCart(name, price) {
     let item = cart.find(i => i.name === name);
     if (item) {
@@ -12,7 +29,7 @@ function addToCart(name, price) {
     alert(`تم إضافة "${name}" إلى السلة بنجاح!`);
 }
 
-// دالة لتحديث واجهة السلة
+// تحديث واجهة السلة وعرض المنتجات مع زر الحذف الذكي
 function updateCartUI() {
     const cartItems = document.getElementById('cart-items');
     const cartCount = document.getElementById('cart-count');
@@ -27,11 +44,20 @@ function updateCartUI() {
         totalPrice += (item.price * item.quantity);
 
         let li = document.createElement('li');
+        // تم تنسيق سطر المنتج ليكون الحذف سهل ومباشر بالضغط على زر X الأحمر
         li.innerHTML = `
-            <span>${item.name} (x${item.quantity})</span>
-            <span>${item.price * item.quantity} جنيه 
-                <button onclick="event.stopPropagation(); removeFromCart(${index})" style="background:#ff4a5a; color:white; border:none; padding:2px 6px; border-radius:3px; margin-right:5px; cursor:pointer; font-weight:bold;">X</button>
-            </span>
+            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+                <span style="font-weight: 600; color: #000;">${item.name}</span>
+                <span style="font-size: 0.85rem; color: #666;">الكمية: ${item.quantity} × ${item.price} ج.م</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-weight: 700; color: #ff4a7a;">${item.price * item.quantity} ج.م</span>
+                <button onclick="event.stopPropagation(); removeFromCart(${index})" 
+                        style="background: #ff4d4d; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;"
+                        title="مسح من السلة">
+                    ✕
+                </button>
+            </div>
         `;
         cartItems.appendChild(li);
     });
@@ -40,44 +66,24 @@ function updateCartUI() {
     cartTotalPrice.innerText = totalPrice;
 }
 
-// حذف منتج من السلة
+// 🔥 دالة حذف المنتج من السلة بالكامل وإعادة حساب الإجمالي فوراً
 function removeFromCart(index) {
+    // حذف العنصر المختار من المصفوفة باستخدام الـ index بتاعه
     cart.splice(index, 1);
+    // إعادة تحديث السلة أمام العميل لرؤية النتيجة فوراً
     updateCartUI();
 }
 
-// فتح وإغلاق السلة
+// إظهار وإخفاء السلة
 function toggleCart() {
     const cartDiv = document.getElementById('cart');
     cartDiv.classList.toggle('hidden');
 }
 
-// دالة فتح نافذة تفاصيل المنتج وعرض بياناته بشكل صحيح
-function openProductModal(name, price, imgSrc, description) {
-    document.getElementById('modal-title').innerText = name;
-    document.getElementById('modal-price').innerText = `${price} جنيه`;
-    document.getElementById('modal-desc').innerText = description;
-    document.getElementById('modal-img').src = imgSrc;
-    
-    // ربط زر الإضافة داخل النافذة بالمنتج الحالي
-    const addBtn = document.getElementById('modal-add-btn');
-    addBtn.onclick = function() {
-        addToCart(name, price);
-        closeProductModal();
-    };
-
-    document.getElementById('product-modal').classList.remove('hidden');
-}
-
-// دالة لإغلاق نافذة وصف المنتج
-function closeProductModal() {
-    document.getElementById('product-modal').classList.add('hidden');
-}
-
-// دالة إرسال الأوردر متضمناً بيانات العميل عبر واتساب
+// إرسال الطلب عبر الواتساب
 function submitOrder() {
     if (cart.length === 0) {
-        alert('سلتك فارغة! يرجى إضافة منتجات أولاً قبل إتمام الطلب.');
+        alert('سلتك فارغة!');
         return;
     }
 
@@ -91,14 +97,10 @@ function submitOrder() {
         return;
     }
 
-    let phoneNumber = "201143343170"; // رقم الواتساب الخاص بك
-    
+    let phoneNumber = "201143343170";
     let message = "🛍️ *طلب جديد من متجر MGstor* 🛍️\n\n";
     message += "👤 *بيانات العميل:*\n";
-    message += `- الاسم: ${name}\n`;
-    message += `- الهاتف: ${phone}\n`;
-    message += `- العنوان: ${address}\n`;
-    message += `- المحافظة: ${city}\n\n`;
+    message += `- الاسم: ${name}\n- الهاتف: ${phone}\n- العنوان: ${address}\n- المحافظة: ${city}\n\n`;
     
     message += "🛒 *المنتجات المطلوبة:*\n";
     let totalPrice = 0;
@@ -110,7 +112,5 @@ function submitOrder() {
     message += `\n💰 *إجمالي الحساب:* ${totalPrice} جنيه مصري`;
     
     let encodedMessage = encodeURIComponent(message);
-    let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    window.open(whatsappURL, '_blank');
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
 }
