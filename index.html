@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MGstor | متجر الهدايا والإكسسوارات</title>
+    <title>MGstor | متجر الهدايا</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,62 +13,59 @@
     <nav class="category-nav">
         <a href="#gifts">🎁 الهدايا</a>
         <a href="#accessories">💍 إكسسوارات</a>
-        <a href="#watches">⌚ ساعات</a>
     </nav>
 </header>
 
 <section id="products" class="products">
-    
+
+    <!-- قسم الهدايا -->
     <h2 class="category-title" id="gifts">🎁 بوكسات الهدايا</h2>
     <div class="products-grid">
         <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
-            <img src="box1.png" alt="بوكس">
+            <div class="slider-container">
+                <img id="img-product-box" src="box1.png" alt="بوكس">
+                <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
+                <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
+            </div>
             <h3>بوكس هدايا MGstor</h3>
-            <p class="price">600 ج.م</p>
-            <button>أضف للسلة</button>
+            <p class="price">600 جنيه</p>
+            <button>أضف للسلة 🛒</button>
         </div>
     </div>
 
+    <!-- قسم الإكسسوارات -->
     <h2 class="category-title" id="accessories">💍 الإكسسوارات</h2>
     <div class="products-grid">
         <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
+            <img src="IMG_2822.jpeg" alt="اسوره">
             <h3>اسوره ايه الكرسي</h3>
-            <p class="price">120 ج.م</p>
+            <p class="price">120 جنيه</p>
             <button>أضف للسلة</button>
         </div>
         <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
+            <img src="انسيال فان كليڤ.JPG" alt="انسيال">
             <h3>انسيال فان كليف</h3>
-            <p class="price">150 ج.م</p>
+            <p class="price">150 جنيه</p>
             <button>أضف للسلة</button>
         </div>
     </div>
 
-    <h2 class="category-title" id="watches">⌚ الساعات</h2>
-    <div class="products-grid">
-        <div class="card">
-            <h3>ساعة يد رجالي</h3>
-            <p class="price">500 ج.م</p>
-            <button>أضف للسلة</button>
-        </div>
-    </div>
 </section>
 
+<!-- السلة -->
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="cart-count">0</span>)</button>
     <div id="cart" class="cart hidden">
-        <h3>🛒 سلة المشتريات</h3>
+        <h3>سلة المشتريات</h3>
         <ul id="cart-items"></ul>
-        <div class="cart-total">الإجمالي: <span id="cart-total-price">0</span> جنيه</div>
+        <div class="cart-total">إجمالي: <span id="cart-total-price">0</span> ج.م</div>
         <input type="text" id="client-name" placeholder="الاسم">
-        <input type="text" id="client-phone" placeholder="رقم الهاتف">
-        <button class="checkout-btn" onclick="submitOrder()">إرسال الطلب واتساب 💬</button>
+        <input type="tel" id="client-phone" placeholder="الهاتف">
+        <button class="checkout-btn" onclick="submitOrder()">إرسال الطلب (واتساب)</button>
         <button class="close-btn" onclick="toggleCart()">إغلاق</button>
     </div>
 </div>
 
-<footer id="contact">
-    <a class="btn" href="https://wa.me/201064031909" target="_blank">راسلنا على واتساب</a>
-</footer>
 <script src="script.js"></script>
 </body>
 </html>
