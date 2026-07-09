@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MGstor | متجر الهدايا</title>
+    <title>MGstor | متجر الهدايا والإكسسوارات</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -12,38 +13,40 @@
     <div class="logo">🛍️ MGstor</div>
     <nav class="category-nav">
         <a href="#gifts">🎁 الهدايا</a>
-        <a href="#accessories">💍 إكسسوارات</a>
+        <a href="#accessories">💍 الإكسسوارات</a>
+        <a href="#watches">⌚ الساعات</a>
     </nav>
 </header>
 
 <section id="products" class="products">
 
-    <!-- قسم الهدايا -->
-    <h2 class="category-title" id="gifts">🎁 بوكسات الهدايا</h2>
+    <!-- قسم بوكسات الهدايا -->
+    <h2 id="gifts" class="category-title">🎁 بوكسات الهدايا</h2>
     <div class="products-grid">
         <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
             <div class="slider-container">
-                <img id="img-product-box" src="box1.png" alt="بوكس">
+                <img id="img-product-box" src="box1.png" alt="بوكس هدايا MGstor">
                 <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
                 <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
             </div>
-            <h3>بوكس هدايا MGstor</h3>
+            <h3>🎁 بوكس هدايا MGstor (العرض الأقوى)</h3>
             <p class="price">600 جنيه</p>
-            <button>أضف للسلة 🛒</button>
+            <p class="product-description">أقوى عرض هدايا متكامل ومميز! البوكس يحتوي على: طقم اسكوير استلس بيور الفاخر (سلسلة + انسيال + خاتم) + 4 بورتريهات صغيرة مميزة + 1 بورتريه كبير راقي + 3 قطع شوكولاتة فاخرة لإضافة لمسة حلوة.</p>
+            <button>أضف العرض للسلة 🛒</button>
         </div>
     </div>
 
     <!-- قسم الإكسسوارات -->
-    <h2 class="category-title" id="accessories">💍 الإكسسوارات</h2>
+    <h2 id="accessories" class="category-title">💍 الإكسسوارات</h2>
     <div class="products-grid">
         <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
-            <img src="IMG_2822.jpeg" alt="اسوره">
+            <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
             <h3>اسوره ايه الكرسي</h3>
             <p class="price">120 جنيه</p>
             <button>أضف للسلة</button>
         </div>
         <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
-            <img src="انسيال فان كليڤ.JPG" alt="انسيال">
+            <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
             <h3>انسيال فان كليف</h3>
             <p class="price">150 جنيه</p>
             <button>أضف للسلة</button>
@@ -52,16 +55,16 @@
 
 </section>
 
-<!-- السلة -->
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="cart-count">0</span>)</button>
     <div id="cart" class="cart hidden">
-        <h3>سلة المشتريات</h3>
+        <h3>🛒 سلة المشتريات</h3>
         <ul id="cart-items"></ul>
-        <div class="cart-total">إجمالي: <span id="cart-total-price">0</span> ج.م</div>
+        <div class="cart-total">الإجمالي: <span id="cart-total-price">0</span> جنيه</div>
         <input type="text" id="client-name" placeholder="الاسم">
         <input type="tel" id="client-phone" placeholder="الهاتف">
-        <button class="checkout-btn" onclick="submitOrder()">إرسال الطلب (واتساب)</button>
+        <input type="text" id="client-address" placeholder="العنوان">
+        <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال عبر واتساب 💬</button>
         <button class="close-btn" onclick="toggleCart()">إغلاق</button>
     </div>
 </div>
