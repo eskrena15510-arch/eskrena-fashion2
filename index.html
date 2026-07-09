@@ -25,14 +25,23 @@
     <a class="btn" href="#products">تصفح المنتجات الآن</a>
 </section>
 
-<!-- قسم المنتجات -->
 <section id="products" class="products">
     
-    <!-- المنتج 1: اسوره ايه الكرسي -->
+    <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
+        <div class="slider-container">
+            <img id="img-product-box" src="box1.png" alt="بوكس هدايا MGstor">
+            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
+            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
+        </div>
+        <h3 style="color: #ff4a5a;">🎁 بوكس هدايا MGstor (العرض الأقوى)</h3>
+        <p class="price">600 جنيه</p>
+        <p class="product-description">أقوى عرض هدايا متكامل ومميز! البوكس يحتوي على: طقم اسكوير استلس بيور الفاخر (سلسلة + انسيال + خاتم) + 4 بورتريهات صغيرة مميزة + 1 بورتريه كبير راقي + 3 قطع شوكولاتة فاخرة لإضافة لمسة حلوة. كل هذا في بوكس واحد أنيق جاهز للتوصيل!</p>
+        <button style="background-color: #25d366;">أضف العرض للسلة 🛒</button>
+    </div>
+
     <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
         <div class="slider-container">
             <img id="img-product-1" src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
-            <!-- يمكنك إضافة أزرار التقليب هنا لاحقاً إذا أرسلت صوراً أخرى لها -->
         </div>
         <h3>اسوره ايه الكرسي</h3>
         <p class="price">120 جنيه</p>
@@ -40,7 +49,6 @@
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 2: انسيال فان كليف -->
     <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
         <div class="slider-container">
             <img id="img-product-2" src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
@@ -51,7 +59,6 @@
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 3: انسيال حرفك استلس -->
     <div class="card" onclick="addToCart('انسيال حرفك استلس', 150)">
         <div class="slider-container">
             <img id="img-product-3" src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
@@ -62,7 +69,6 @@
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 4: خاتم (أنت عمري) -->
     <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
         <div class="slider-container">
             <img id="img-product-4" src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
@@ -73,13 +79,11 @@
         <button>أضف للسلة</button>
     </div>
 
-    <!-- المنتج 5: طقم اسكوير استلس بيور (بصورك الجديدة والتقليب) -->
     <div class="card" onclick="addToCart('طقم اسكوير استلس بيور', 320)">
         <div class="slider-container">
-            <img src="IMG_2832.jpeg" src="IMG_2831.jpeg" alt="طقم اسكوير استلس بيور">
-            <!-- أزرار الأسهم للتبديل بين صورتيك -->
-            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.jpg', 'square2.jpg'], -1)">&#10094;</button>
-            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.jpg', 'square2.jpg'], 1)">&#10095;</button>
+            <img id="img-product-5" src="square1.png" alt="طقم اسكوير استلس بيور">
+            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.png', 'square2.png'], -1)">&#10094;</button>
+            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.png', 'square2.png'], 1)">&#10095;</button>
         </div>
         <h3>طقم اسكوير استلس بيور</h3>
         <p class="price">320 جنيه</p>
@@ -89,7 +93,6 @@
 
 </section>
 
-<!-- السلة الثابتة واستمارة الطلب -->
 <div class="cart-box">
     <button class="cart-btn" onclick="toggleCart()">
         🛒 السلة (<span id="cart-count">0</span>)
@@ -98,13 +101,11 @@
     <div id="cart" class="cart hidden">
         <h3>🛒 سلة المشتريات</h3>
         <ul id="cart-items">
-            <!-- المنتجات تظهر هنا تلقائياً -->
-        </ul>
+            </ul>
         <div class="cart-total">
             إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
         </div>
         
-        <!-- استمارة بيانات العميل داخل الموقع -->
         <div id="checkout-form" class="checkout-form">
             <h4>📋 بيانات الشحن والتوصيل</h4>
             <input type="text" id="client-name" placeholder="الاسم الكامل" required>
