@@ -9,7 +9,7 @@ function addToCart(name, price) {
         cart.push({ name: name, price: price, quantity: 1 });
     }
     updateCartUI();
-    alert(`تم إضافة ${name} إلى السلة بنجاح!`);
+    alert(`تم إضافة "${name}" إلى السلة بنجاح!`);
 }
 
 // دالة لتحديث واجهة السلة
@@ -30,7 +30,7 @@ function updateCartUI() {
         li.innerHTML = `
             <span>${item.name} (x${item.quantity})</span>
             <span>${item.price * item.quantity} جنيه 
-                <button onclick="removeFromCart(${index})" style="background:#ff4a5a; color:white; border:none; padding:2px 6px; border-radius:3px; margin-right:5px; cursor:pointer; font-weight:bold;">X</button>
+                <button onclick="event.stopPropagation(); removeFromCart(${index})" style="background:#ff4a5a; color:white; border:none; padding:2px 6px; border-radius:3px; margin-right:5px; cursor:pointer; font-weight:bold;">X</button>
             </span>
         `;
         cartItems.appendChild(li);
@@ -40,6 +40,7 @@ function updateCartUI() {
     cartTotalPrice.innerText = totalPrice;
 }
 
+// حذف منتج من السلة
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCartUI();
@@ -51,13 +52,14 @@ function toggleCart() {
     cartDiv.classList.toggle('hidden');
 }
 
-// دالة لفتح نافذة وصف المنتج
+// دالة فتح نافذة تفاصيل المنتج وعرض بياناته بشكل صحيح
 function openProductModal(name, price, imgSrc, description) {
     document.getElementById('modal-title').innerText = name;
     document.getElementById('modal-price').innerText = `${price} جنيه`;
     document.getElementById('modal-desc').innerText = description;
     document.getElementById('modal-img').src = imgSrc;
     
+    // ربط زر الإضافة داخل النافذة بالمنتج الحالي
     const addBtn = document.getElementById('modal-add-btn');
     addBtn.onclick = function() {
         addToCart(name, price);
@@ -72,7 +74,7 @@ function closeProductModal() {
     document.getElementById('product-modal').classList.add('hidden');
 }
 
-// دالة إرسال الأوردر متضمناً بيانات العميل داخل الموقع
+// دالة إرسال الأوردر متضمناً بيانات العميل عبر واتساب
 function submitOrder() {
     if (cart.length === 0) {
         alert('سلتك فارغة! يرجى إضافة منتجات أولاً قبل إتمام الطلب.');
