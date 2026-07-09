@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGstor | متجر الهدايا والإكسسوارات</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -26,111 +26,41 @@
 </section>
 
 <section id="products" class="products">
-    
     <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
         <div class="slider-container">
             <img id="img-product-box" src="box1.png" alt="بوكس هدايا MGstor">
             <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
             <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
         </div>
-        <h3 style="color: #ff4a5a;">🎁 بوكس هدايا MGstor (العرض الأقوى)</h3>
+        <h3 style="color: #000000;">🎁 بوكس هدايا MGstor</h3>
         <p class="price">600 جنيه</p>
-        <p class="product-description">أقوى عرض هدايا متكامل ومميز! البوكس يحتوي على: طقم اسكوير استلس بيور الفاخر (سلسلة + انسيال + خاتم) + 4 بورتريهات صغيرة مميزة + 1 بورتريه كبير راقي + 3 قطع شوكولاتة فاخرة لإضافة لمسة حلوة. كل هذا في بوكس واحد أنيق جاهز للتوصيل!</p>
-        <button style="background-color: #25d366;">أضف العرض للسلة 🛒</button>
+        <p class="product-description">طقم اسكوير استلس بيور + 4 بورتريهات صغيرة + 1 بورتريه كبير + 3 قطع شوكولاتة فاخرة.</p>
+        <button>أضف العرض للسلة 🛒</button>
     </div>
-
-    <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
-        <div class="slider-container">
-            <img id="img-product-1" src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
-        </div>
-        <h3>اسوره ايه الكرسي</h3>
-        <p class="price">120 جنيه</p>
-        <p class="product-description">إسورة رائعة ومميزة مطلية بجودة عالية محفور عليها آية الكرسي بدقة، المقاس قابل للتعديل لتناسب الجميع وتعتبر هدية قيمة وجذابة.</p>
-        <button>أضف للسلة</button>
-    </div>
-
-    <div class="card" onclick="addToCart('انسيال فان كليف', 150)">
-        <div class="slider-container">
-            <img id="img-product-2" src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
-        </div>
-        <h3>انسيال فان كليف</h3>
-        <p class="price">150 جنيه</p>
-        <p class="product-description">انسيال فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية، يضفي لمسة ساحرة على إطلالتك اليومية ومقاوم لتغير اللون.</p>
-        <button>أضف للسلة</button>
-    </div>
-
-    <div class="card" onclick="addToCart('انسيال حرفك استلس', 150)">
-        <div class="slider-container">
-            <img id="img-product-3" src="IMG_2823.jpeg" alt="انسيال حرفك استلس">
-        </div>
-        <h3>انسيال حرفك استلس</h3>
-        <p class="price">150 جنيه</p>
-        <p class="product-description">انسيال مصنوع من مادة الاستانلس ستيل الأصلية المقاومة للصدأ، يمكنك اختيار حرفك المفضل ليأتي محفوراً بشكل أنيق وعصري.</p>
-        <button>أضف للسلة</button>
-    </div>
-
-    <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
-        <div class="slider-container">
-            <img id="img-product-4" src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
-        </div>
-        <h3>خاتم (أنت عمري)</h3>
-        <p class="price">250 جنيه</p>
-        <p class="product-description">خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي أصيل، هدية رومانسية مثالية للتعبير عن مشاعرك لمن تحب.</p>
-        <button>أضف للسلة</button>
-    </div>
-
-    <div class="card" onclick="addToCart('طقم اسكوير استلس بيور', 320)">
-        <div class="slider-container">
-            <img id="IMG_2832.jpeg" src="IMG_2832.jpeg" alt="طقم اسكوير استلس بيور">
-            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('IMG_2832.jpeg', ['IMG_2831.jpeg', 'IMG_2832.jpeg'], -1)">&#10094;</button>
-            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-5', ['square1.png', 'square2.png'], 1)">&#10095;</button>
-        </div>
-        <h3>طقم اسكوير استلس بيور</h3>
-        <p class="price">320 جنيه</p>
-        <p class="product-description">طقم كامل فاخر (سلسلة، انسيال، وخاتم) بتصميم مربع (اسكوير) مرصع بالفصوص الكريستالية اللامعة. مصنوع من الاستانلس ستيل البيور النقي المقاوم للصدأ وتغير اللون.</p>
-        <button>أضف للسلة</button>
-    </div>
-
-</section>
+    </section>
 
 <div class="cart-box">
-    <button class="cart-btn" onclick="toggleCart()">
-        🛒 السلة (<span id="cart-count">0</span>)
-    </button>
-
+    <button class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="cart-count">0</span>)</button>
     <div id="cart" class="cart hidden">
         <h3>🛒 سلة المشتريات</h3>
-        <ul id="cart-items">
-            </ul>
-        <div class="cart-total">
-            إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
-        </div>
-        
+        <ul id="cart-items"></ul>
+        <div class="cart-total">إجمالي الحساب: <span id="cart-total-price">0</span> جنيه</div>
         <div id="checkout-form" class="checkout-form">
             <h4>📋 بيانات الشحن والتوصيل</h4>
             <input type="text" id="client-name" placeholder="الاسم الكامل" required>
-            <input type="tel" id="client-phone" placeholder="رقم الهاتف (واتساب)" required>
-            <input type="text" id="client-address" placeholder="العنوان بالتفصيل" required>
+            <input type="tel" id="client-phone" placeholder="رقم الهاتف" required>
+            <input type="text" id="client-address" placeholder="العنوان" required>
             <input type="text" id="client-city" placeholder="المحافظة" required>
-            <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال الطلب عبر واتساب 💬</button>
+            <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال عبر واتساب 💬</button>
         </div>
-        
         <button class="close-btn" onclick="toggleCart()">إغلاق السلة</button>
     </div>
 </div>
 
-<section id="about">
-    <h2>من نحن</h2>
-    <p>MGstor متجر متخصص في بيع الهدايا والإكسسوارات الراقية بأفضل الأسعار والجودة العالية مع خدمة توصيل سريعة.</p>
-</section>
-
 <footer id="contact">
     <h3>MGstor</h3>
-    <p>للطلب والاستفسار المباشر</p>
-    <a class="btn" href="https://wa.me/201143343170" target="_blank">راسلنا على واتساب</a>
-    <p style="margin-top:20px; font-size: 0.9rem; color: #bbb;">© 2026 MGstor. جميع الحقوق محفوظة.</p>
+    <a class="btn" href="https://wa.me/201064031909" target="_blank">راسلنا على واتساب</a>
 </footer>
-
 <script src="script.js"></script>
 </body>
 </html>
