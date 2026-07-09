@@ -1,10 +1,106 @@
-MGstor/
-│── index.html
-│── style.css
-│── script.js
-│── images/
-│     ├── logo.png
-│     ├── banner.jpg
-│     ├── product1.jpg
-│     ├── product2.jpg
-│     └── ...
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MGstor | هدايا وإكسسوارات</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎁 MGstor</div>
+
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="#about">من نحن</a>
+        <a href="#contact">تواصل</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+<h1>أفضل الهدايا والإكسسوارات</h1>
+
+<p>
+اكتشف أحدث المنتجات بأفضل الأسعار.
+</p>
+
+<a href="#products" class="btn">
+تسوق الآن
+</a>
+
+</section>
+
+<section id="products" class="products">
+
+<h2>منتجاتنا</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://picsum.photos/300?1">
+<h3>بوكس هدايا</h3>
+<p>350 جنيه</p>
+<button onclick="buy()">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?2">
+<h3>سلسلة أنيقة</h3>
+<p>180 جنيه</p>
+<button onclick="buy()">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?3">
+<h3>ساعة رجالي</h3>
+<p>650 جنيه</p>
+<button onclick="buy()">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?4">
+<h3>محفظة جلد</h3>
+<p>280 جنيه</p>
+<button onclick="buy()">أضف للسلة</button>
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2>من نحن</h2>
+
+<p>
+MGstor متجر متخصص في الهدايا والإكسسوارات بأفضل جودة وأسعار مناسبة.
+</p>
+
+</section>
+
+<section id="contact">
+
+<h2>تواصل معنا</h2>
+
+<a class="whatsapp" href="https://wa.me/201143343170">
+راسلنا على واتساب
+</a>
+
+</section>
+
+<footer>
+
+© 2026 MGstor جميع الحقوق محفوظة
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
