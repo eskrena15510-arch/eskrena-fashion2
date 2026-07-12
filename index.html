@@ -5,19 +5,42 @@
     <title>MGstor | متجر الهدايا</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-        /* نظام الشبكة لجعل المنتجات بجانب بعضها وبحجم متناسق */
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
-        .filter-btn { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; background: #ddd; border-radius: 5px; }
-        .filter-btn:hover { background: #333; color: white; }
+        
+        /* جعل المنتجات فوق بعضها */
+        .products { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        
+        .card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            text-align: center; 
+            width: 90%; 
+            max-width: 500px; 
+        }
+        
+        .card img { width: 100%; height: auto; border-radius: 10px; }
+        
+        .filter-btn { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; background: #333; color: white; border-radius: 5px; }
+        
+        button.order-btn { 
+            background: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
 <h1 style="text-align:center;">MGstor</h1>
 
-<div style="text-align:center; margin-bottom:20px;">
+<div style="text-align:center; margin-bottom:30px;">
     <button class="filter-btn" onclick="filter('all')">الكل</button>
     <button class="filter-btn" onclick="filter('box')">🎁 بوكسات</button>
     <button class="filter-btn" onclick="filter('bracelet')">📿 أساور</button>
@@ -26,17 +49,16 @@
 </div>
 
 <div class="products" id="productGrid">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="order('بوكس هدايا', 600)">اطلب واتساب</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="order('اسورة آية الكرسي', 120)">اطلب واتساب</button></div>
-    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="order('اسورة كارتير', 180)">اطلب واتساب</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button onclick="order('سلسلة قلب', 150)">اطلب واتساب</button></div>
-    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button onclick="order('سلسلة حروف', 150)">اطلب واتساب</button></div>
-    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button onclick="order('سلسلة أسماء', 170)">اطلب واتساب</button></div>
-    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button onclick="order('خاتم أنت عمري', 250)">اطلب واتساب</button></div>
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button class="order-btn" onclick="order('بوكس هدايا', 600)">اطلب واتساب 📲</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button class="order-btn" onclick="order('اسورة آية الكرسي', 120)">اطلب واتساب 📲</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button class="order-btn" onclick="order('اسورة كارتير', 180)">اطلب واتساب 📲</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button class="order-btn" onclick="order('سلسلة قلب', 150)">اطلب واتساب 📲</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button class="order-btn" onclick="order('سلسلة حروف', 150)">اطلب واتساب 📲</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button class="order-btn" onclick="order('سلسلة أسماء', 170)">اطلب واتساب 📲</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button class="order-btn" onclick="order('خاتم أنت عمري', 250)">اطلب واتساب 📲</button></div>
 </div>
 
 <script>
-    // وظيفة التصنيفات
     function filter(cat) {
         let items = document.querySelectorAll('.card');
         items.forEach(item => {
@@ -45,7 +67,6 @@
         });
     }
 
-    // وظيفة الطلب المباشر للواتساب (أضمن وأسرع للتسليم)
     function order(name, price) {
         let msg = `أريد طلب: ${name} - السعر: ${price} جنيه`;
         window.open(`https://wa.me/201064031909?text=${encodeURIComponent(msg)}`, '_blank');
