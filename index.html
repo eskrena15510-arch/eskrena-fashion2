@@ -5,42 +5,26 @@
     <title>MGstor | متجر الهدايا</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-        
-        /* جعل المنتجات فوق بعضها */
-        .products { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-        
-        .card { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            text-align: center; 
-            width: 90%; 
-            max-width: 500px; 
-        }
-        
-        .card img { width: 100%; height: auto; border-radius: 10px; }
-        
-        .filter-btn { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; background: #333; color: white; border-radius: 5px; }
-        
-        button.order-btn { 
-            background: #25d366; 
-            color: white; 
-            border: none; 
-            padding: 12px 25px; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            width: 100%; 
-            margin-top: 10px;
-            font-size: 16px;
-        }
+        .products { display: block; max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
+        #orderSummary { background: #fff; padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 2px dashed #25d366; text-align: center; max-width: 600px; margin: 0 auto 20px auto; }
+        .order-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        .filter-btn { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; background: #333; color: white; border-radius: 5px; }
     </style>
 </head>
 <body>
 
 <h1 style="text-align:center;">MGstor</h1>
 
-<div style="text-align:center; margin-bottom:30px;">
+<div id="orderSummary">
+    <h3>🛒 سلة طلباتك</h3>
+    <div id="cartList" style="margin: 10px 0; text-align: right;">لا توجد منتجات مضافة</div>
+    <p>الإجمالي: <span id="totalPrice">0</span> جنيه</p>
+    <button class="order-btn" onclick="sendWhatsApp()">إرسال الطلب عبر واتساب 📲</button>
+</div>
+
+<div style="text-align:center; margin-bottom:20px;">
     <button class="filter-btn" onclick="filter('all')">الكل</button>
     <button class="filter-btn" onclick="filter('box')">🎁 بوكسات</button>
     <button class="filter-btn" onclick="filter('bracelet')">📿 أساور</button>
@@ -48,17 +32,32 @@
     <button class="filter-btn" onclick="filter('ring')">💍 خواتم</button>
 </div>
 
-<div class="products" id="productGrid">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button class="order-btn" onclick="order('بوكس هدايا', 600)">اطلب واتساب 📲</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button class="order-btn" onclick="order('اسورة آية الكرسي', 120)">اطلب واتساب 📲</button></div>
-    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button class="order-btn" onclick="order('اسورة كارتير', 180)">اطلب واتساب 📲</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button class="order-btn" onclick="order('سلسلة قلب', 150)">اطلب واتساب 📲</button></div>
-    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button class="order-btn" onclick="order('سلسلة حروف', 150)">اطلب واتساب 📲</button></div>
-    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button class="order-btn" onclick="order('سلسلة أسماء', 170)">اطلب واتساب 📲</button></div>
-    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button class="order-btn" onclick="order('خاتم أنت عمري', 250)">اطلب واتساب 📲</button></div>
+<div class="products">
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="addToCart('بوكس هدايا MGstor', 600)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addToCart('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="addToCart('اسورة كارتير', 180)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button onclick="addToCart('سلسلة قلب', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button onclick="addToCart('سلسلة حروف', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button onclick="addToCart('سلسلة أسماء', 170)">أضف للسلة</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button onclick="addToCart('خاتم أنت عمري', 250)">أضف للسلة</button></div>
 </div>
 
 <script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+        updateSummary();
+    }
+
+    function updateSummary() {
+        let list = document.getElementById('cartList');
+        list.innerHTML = cart.map(item => `• ${item.name} (${item.price} ج.م)<br>`).join('');
+        document.getElementById('totalPrice').innerText = total;
+    }
+
     function filter(cat) {
         let items = document.querySelectorAll('.card');
         items.forEach(item => {
@@ -67,9 +66,10 @@
         });
     }
 
-    function order(name, price) {
-        let msg = `أريد طلب: ${name} - السعر: ${price} جنيه`;
-        window.open(`https://wa.me/201064031909?text=${encodeURIComponent(msg)}`, '_blank');
+    function sendWhatsApp() {
+        if(cart.length === 0) { alert("السلة فارغة!"); return; }
+        let msg = "طلب جديد من المتجر:%0A" + cart.map(i => i.name).join(', ') + "%0Aالإجمالي: " + total + " جنيه";
+        window.open(`https://wa.me/201064031909?text=${msg}`, '_blank');
     }
 </script>
 
