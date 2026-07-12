@@ -1,73 +1,72 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MGstor | متجر احترافي</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 10px; }
-        
-        /* السلة */
-        .cart-section { background: #fff; padding: 15px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .cart-section input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 8px; }
-        .btn-order { width: 100%; padding: 12px; background: #25d366; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
-
-        /* شبكة المنتجات - ده اللي هيخلي الشكل احترافي */
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        
-        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; padding: 10px; }
-        .product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
-        .product-card h3 { font-size: 14px; margin: 10px 0 5px; }
-        .product-card p { font-size: 13px; color: #666; margin: 0 0 10px; }
-        .btn-add { width: 100%; padding: 8px; background: #333; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-<h2 style="text-align: center;">MGstor 🎁</h2>
-
-<div class="cart-section">
-    <h3>🛒 سلة المشتريات</h3>
-    <ul id="cart-list" style="padding-right: 20px; font-size: 14px;"></ul>
-    <p>الإجمالي: <span id="total" style="color: #d32f2f; font-weight: bold;">0</span> جنيه</p>
-    <input type="text" id="name" placeholder="الاسم الكريم">
-    <input type="tel" id="phone" placeholder="رقم الهاتف">
-    <input type="text" id="address" placeholder="عنوان التوصيل">
-    <button class="btn-order" onclick="sendOrder()">إرسال الطلب عبر واتساب</button>
-</div>
-
 <div class="products-grid" id="products">
-    <!-- مثال لمنتج: كرر هذا البلوك لكل المنتجات -->
+    <!-- أسورة كابلز 1 -->
     <div class="product-card">
-        <img src="IMG_3010.jpeg" alt="product">
-        <h3>أسورة كابلز</h3>
+        <img src="IMG_3010.jpeg" alt="أسورة كابلز 1">
+        <h3>أسورة كابلز 1</h3>
         <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة كابلز', 150)">أضف للسلة</button>
+        <button class="btn-add" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button>
     </div>
-    <!-- انسخ السطور اللي فوق وكررها وغير اسم الصورة والبيانات -->
+    <!-- أسورة كابلز 2 -->
+    <div class="product-card">
+        <img src="IMG_3011.jpeg" alt="أسورة كابلز 2">
+        <h3>أسورة كابلز 2</h3>
+        <p>150 جنيه</p>
+        <button class="btn-add" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button>
+    </div>
+    <!-- أسورة كابلز 3 -->
+    <div class="product-card">
+        <img src="IMG_3014.jpeg" alt="أسورة كابلز 3">
+        <h3>أسورة كابلز 3</h3>
+        <p>150 جنيه</p>
+        <button class="btn-add" onclick="addItem('أسورة كابلز 3', 150)">أضف للسلة</button>
+    </div>
+    <!-- بوكس هدايا -->
+    <div class="product-card">
+        <img src="box1.png" alt="بوكس هدايا">
+        <h3>بوكس هدايا</h3>
+        <p>600 جنيه</p>
+        <button class="btn-add" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button>
+    </div>
+    <!-- أسورة آية الكرسي -->
+    <div class="product-card">
+        <img src="IMG_2822.jpeg" alt="أسورة آية الكرسي">
+        <h3>أسورة آية الكرسي</h3>
+        <p>120 جنيه</p>
+        <button class="btn-add" onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة</button>
+    </div>
+    <!-- أسورة كارتير -->
+    <div class="product-card">
+        <img src="cartier.jpg" alt="أسورة كارتير">
+        <h3>أسورة كارتير</h3>
+        <p>180 جنيه</p>
+        <button class="btn-add" onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button>
+    </div>
+    <!-- سلسلة قلب -->
+    <div class="product-card">
+        <img src="IMG_2853.jpeg" alt="سلسلة قلب">
+        <h3>سلسلة قلب</h3>
+        <p>150 جنيه</p>
+        <button class="btn-add" onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button>
+    </div>
+    <!-- سلسلة حروف -->
+    <div class="product-card">
+        <img src="IMG_2823.jpeg" alt="سلسلة حروف">
+        <h3>سلسلة حروف</h3>
+        <p>150 جنيه</p>
+        <button class="btn-add" onclick="addItem('سلسلة حروف', 150)">أضف للسلة</button>
+    </div>
+    <!-- سلسلة أسماء -->
+    <div class="product-card">
+        <img src="name.jpg" alt="سلسلة أسماء">
+        <h3>سلسلة أسماء</h3>
+        <p>170 جنيه</p>
+        <button class="btn-add" onclick="addItem('سلسلة أسماء', 170)">أضف للسلة</button>
+    </div>
+    <!-- خاتم أنت عمري -->
+    <div class="product-card">
+        <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم أنت عمري">
+        <h3>خاتم أنت عمري</h3>
+        <p>250 جنيه</p>
+        <button class="btn-add" onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة</button>
+    </div>
 </div>
-
-<script>
-    let cart = []; let total = 0;
-    function addItem(name, price) {
-        cart.push({name, price});
-        total += price;
-        updateCart();
-    }
-    function updateCart() {
-        let list = document.getElementById('cart-list');
-        list.innerHTML = cart.map(item => `<li>${item.name} - ${item.price} ج</li>`).join('');
-        document.getElementById('total').innerText = total;
-    }
-    function sendOrder() {
-        let n = document.getElementById('name').value;
-        let p = document.getElementById('phone').value;
-        let a = document.getElementById('address').value;
-        if(!n || !p || !a) return alert("من فضلك املأ البيانات");
-        let msg = `طلب جديد من ${n}%0Aالهاتف: ${p}%0Aالعنوان: ${a}%0Aالطلبات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه`;
-        window.open(`https://wa.me/201064031909?text=${msg}`);
-    }
-</script>
-</body>
-</html>
