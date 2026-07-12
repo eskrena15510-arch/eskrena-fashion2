@@ -2,21 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>MGstor | المتجر الكامل</title>
+    <title>MGstor | المتجر</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
         .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; }
         .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .slider { position: relative; width: 100%; height: 250px; overflow: hidden; border-radius: 12px; margin-bottom: 5px; }
-        .slider img { display: none; width: 100%; height: 100%; object-fit: cover; }
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box; }
+        .slider { position: relative; width: 100%; height: 200px; overflow: hidden; border-radius: 10px; margin-bottom: 10px; }
+        .slider img { display: none; width: 100%; height: 100%; object-fit: contain; background: #f9f9f9; }
         .slider img.active { display: block; }
         .nav-arrows { display: flex; justify-content: space-between; margin-bottom: 10px; }
         .nav-arrows button { background: #eee; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
         .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
         .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
         input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        li { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 5px 0; }
+        li { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 8px 0; }
         .del-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
@@ -43,7 +43,7 @@
 </div>
 
 <div id="products">
-    <!-- مثال لمنتج (كرر هذا النمط لكل منتجاتك) -->
+    <!-- أساور الكابلز -->
     <div class="card bracelet">
         <div class="slider">
             <img src="IMG_3010.jpeg" class="active">
@@ -54,13 +54,17 @@
             <button onclick="prev(this)">⬅</button>
             <button onclick="next(this)">➡</button>
         </div>
-        <h3>أسورة كابلز</h3><p>150 ج</p>
-        <button onclick="addItem('أسورة كابلز', 150)">أضف للسلة 🛒</button>
+        <h3>أساور كابلز</h3><p>150 ج</p>
+        <button onclick="addItem('أساور كابلز', 150)">أضف للسلة 🛒</button>
     </div>
+
+    <!-- مثال لمنتجات أخرى -->
+    <div class="card box"><div class="slider"><img src="box1.png" class="active"></div><h3>بوكس هدايا</h3><p>600 ج</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
+    <div class="card bracelet"><div class="slider"><img src="IMG_2822.jpeg" class="active"></div><h3>أسورة آية الكرسي</h3><p>120 ج</p><button onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><div class="slider"><img src="ring1.jpg" class="active"></div><h3>خاتم ذهبي</h3><p>300 ج</p><button onclick="addItem('خاتم ذهبي', 300)">أضف للسلة 🛒</button></div>
 </div>
 
 <script>
-    // دوال السلايدر
     function next(btn) { 
         let slider = btn.parentElement.parentElement.querySelector('.slider'); 
         let imgs = Array.from(slider.querySelectorAll('img')); 
@@ -78,7 +82,6 @@
         imgs[(index - 1 + imgs.length) % imgs.length].classList.add('active'); 
     }
     
-    // دوال السلة والفلتر
     let cart = []; let total = 0;
     function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
     function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
