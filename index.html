@@ -6,16 +6,10 @@
     <title>MGstor | متجر الهدايا</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
-        
-        /* الشريط العلوي */
         .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; gap: 10px; }
         .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
-        
-        /* المنتجات */
         .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
-        
-        /* السلة */
         .cart-box { background: #fff; padding: 15px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 20px; }
         .buy-btn { background: #25d366; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; margin-top: 10px; }
         input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
@@ -30,6 +24,7 @@
     <button class="nav-btn" onclick="filter('box')">🎁 بوكسات</button>
     <button class="nav-btn" onclick="filter('bracelet')">📿 أساور</button>
     <button class="nav-btn" onclick="filter('necklace')">💎 سلاسل</button>
+    <button class="nav-btn" onclick="filter('ring')">💍 خواتم</button>
 </div>
 
 <div class="cart-box">
@@ -43,35 +38,31 @@
 </div>
 
 <div id="products">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
     <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="addItem('اسورة كارتير', 180)">أضف للسلة 🛒</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button onclick="addItem('سلسلة حروف', 150)">أضف للسلة 🛒</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button onclick="addItem('سلسلة أسماء', 170)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة 🛒</button></div>
 </div>
 
 <script>
     let cart = []; let total = 0;
-
     function addItem(name, price) {
         cart.push({name, price});
         total += price;
-        // تحديث قائمة السلة
         let list = document.getElementById("cart-list");
-        let li = document.createElement("li");
-        li.innerText = `${name} - ${price} جنيه`;
-        list.appendChild(li);
-        // تحديث الإجمالي
+        list.innerHTML += `<li>${name} - ${price} جنيه</li>`;
         document.getElementById("total").innerText = total;
-        alert("تمت الإضافة للسلة!");
     }
-
     function filter(cat) {
         document.querySelectorAll('.card').forEach(item => {
             item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none";
         });
     }
-
     function sendOrder() {
-        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${document.getElementById('name').value}`;
+        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${document.getElementById('name').value}%0Aالهاتف: ${document.getElementById('phone').value}%0Aالعنوان: ${document.getElementById('address').value}`;
         window.open("https://wa.me/201064031909?text=" + msg);
     }
 </script>
