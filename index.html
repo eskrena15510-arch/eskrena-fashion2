@@ -624,15 +624,14 @@ onclick="addToCart('سلسلة حروف',150)">
 
 <div class="cart-box">
 
-    <button class="cart-btn" onclick="toggleCart()">
-
+    <button class="cart-btn" onclick="openCart()"
         🛒 السلة
 
-        (<span id="cart-count">0</span>)
+       <span id="cartCount">0</span>
 
     </button>
 
-    <div id="cart" class="cart hidden">
+ <div id="cartBox" class="cart hidden">
 
         <h3>
 
@@ -640,7 +639,7 @@ onclick="addToCart('سلسلة حروف',150)">
 
         </h3>
 
-        <ul id="cart-items">
+    <ul id="cartItems">
 
         </ul>
 
