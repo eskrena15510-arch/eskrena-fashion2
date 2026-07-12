@@ -2,54 +2,55 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>MGstor | متجر الهدايا والإكسسوارات</title>
+    <title>MGstor | متجر الهدايا</title>
     <style>
-        /* CSS المدمج */
-        body { font-family: 'Cairo', sans-serif; background: #f4f4f4; margin: 0; }
-        .floating-cart { position: fixed; top: 20px; left: 20px; z-index: 1000; padding: 10px 20px; background: #ff4757; color: white; border: none; border-radius: 25px; cursor: pointer; }
-        .cart-box { position: fixed; top: 0; right: 0; width: 300px; height: 100%; background: #fff; padding: 20px; z-index: 1001; box-shadow: -5px 0 10px rgba(0,0,0,0.2); display: none; }
-        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #fff; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .card button { background: #2d3436; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        /* نظام الشبكة لجعل المنتجات بجانب بعضها وبحجم متناسق */
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+        .filter-btn { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; background: #ddd; border-radius: 5px; }
+        .filter-btn:hover { background: #333; color: white; }
     </style>
 </head>
 <body>
 
-<button class="floating-cart" onclick="document.getElementById('cartBox').style.display='block'">🛒 السلة (<span id="cartCount">0</span>)</button>
+<h1 style="text-align:center;">MGstor</h1>
 
-<div id="cartBox" class="cart-box">
-    <button onclick="document.getElementById('cartBox').style.display='none'">✖ إغلاق</button>
-    <h3>سلة المشتريات</h3>
-    <div id="cartItems"></div>
-    <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
-    <input id="client-name" type="text" placeholder="الاسم" style="width:100%; margin:10px 0;">
-    <button onclick="submitOrder()" style="width:100%; background:#25d366; color:white; border:none; padding:10px;">تأكيد الطلب</button>
+<div style="text-align:center; margin-bottom:20px;">
+    <button class="filter-btn" onclick="filter('all')">الكل</button>
+    <button class="filter-btn" onclick="filter('box')">🎁 بوكسات</button>
+    <button class="filter-btn" onclick="filter('bracelet')">📿 أساور</button>
+    <button class="filter-btn" onclick="filter('necklace')">💎 سلاسل</button>
+    <button class="filter-btn" onclick="filter('ring')">💍 خواتم</button>
 </div>
 
-<section class="products">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="addToCart('بوكس هدايا MGstor', 600)">أضف للسلة</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addToCart('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addToCart('سلسلة قلب', 150)">أضف للسلة</button></div>
-</section>
+<div class="products" id="productGrid">
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="order('بوكس هدايا', 600)">اطلب واتساب</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="order('اسورة آية الكرسي', 120)">اطلب واتساب</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="order('اسورة كارتير', 180)">اطلب واتساب</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button onclick="order('سلسلة قلب', 150)">اطلب واتساب</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button onclick="order('سلسلة حروف', 150)">اطلب واتساب</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button onclick="order('سلسلة أسماء', 170)">اطلب واتساب</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button onclick="order('خاتم أنت عمري', 250)">اطلب واتساب</button></div>
+</div>
 
 <script>
-    /* JavaScript المدمج */
-    let cart = [];
-    let total = 0;
-    function addToCart(name, price) {
-        cart.push({name, price});
-        total += price;
-        document.getElementById('cartCount').innerText = cart.length;
-        document.getElementById('cartTotalPrice').innerText = total;
-        document.getElementById('cartItems').innerHTML += `<p>${name} - ${price} جنيه</p>`;
-        alert("تمت الإضافة للسلة!");
+    // وظيفة التصنيفات
+    function filter(cat) {
+        let items = document.querySelectorAll('.card');
+        items.forEach(item => {
+            if (cat === 'all' || item.classList.contains(cat)) { item.style.display = 'block'; }
+            else { item.style.display = 'none'; }
+        });
     }
-    function submitOrder() {
-        let name = document.getElementById('client-name').value;
-        let msg = `طلب جديد من ${name}. الإجمالي: ${total} جنيه.`;
+
+    // وظيفة الطلب المباشر للواتساب (أضمن وأسرع للتسليم)
+    function order(name, price) {
+        let msg = `أريد طلب: ${name} - السعر: ${price} جنيه`;
         window.open(`https://wa.me/201064031909?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
+
 </body>
 </html>
