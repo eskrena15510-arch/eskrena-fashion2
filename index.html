@@ -5,67 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGstor | متجر الهدايا</title>
     <style>
-        body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding: 10px; }
-        .page { display: none; }
-        .active { display: block; }
-        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
+        
+        /* الشريط العلوي للأصناف */
+        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; gap: 10px; white-space: nowrap; }
+        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        
+        /* تصميم المنتجات */
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
         .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
-        .nav-btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; background: #333; color: white; border: none; border-radius: 10px; font-size: 18px; }
-        .cart-section { background: #fff; padding: 15px; border: 2px solid #25d366; border-radius: 15px; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 18px; }
+        
+        /* السلة */
+        .cart-box { background: #fff; padding: 15px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 20px; }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+        input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-<div id="home" class="page active">
-    <h1 style="text-align:center;">MGstor 🎁</h1>
-    <button class="nav-btn" onclick="showPage('boxes')">🎁 بوكسات</button>
-    <button class="nav-btn" onclick="showPage('bracelets')">📿 أساور</button>
-    <button class="nav-btn" onclick="showPage('necklaces')">💎 سلاسل</button>
-    <button class="nav-btn" onclick="showPage('cart')">🛒 سلة الطلبات</button>
+<h1 style="text-align:center;">MGstor 🎁</h1>
+
+<div class="nav-bar">
+    <button class="nav-btn" onclick="filter('all')">الكل</button>
+    <button class="nav-btn" onclick="filter('box')">🎁 بوكسات</button>
+    <button class="nav-btn" onclick="filter('bracelet')">📿 أساور</button>
+    <button class="nav-btn" onclick="filter('necklace')">💎 سلاسل</button>
+    <button class="nav-btn" onclick="filter('ring')">💍 خواتم</button>
 </div>
 
-<div id="boxes" class="page">
-    <button onclick="showPage('home')">⬅ العودة</button>
-    <div class="card"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
+<div id="products">
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button></div>
 </div>
 
-<div id="bracelets" class="page">
-    <button onclick="showPage('home')">⬅ العودة</button>
-    <div class="card"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
-    <div class="card"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="addItem('اسورة كارتير', 180)">أضف للسلة</button></div>
-</div>
-
-<div id="cart" class="page">
-    <button onclick="showPage('home')">⬅ العودة</button>
-    <div class="cart-section">
-        <h3>🛒 الطلبات</h3>
-        <ul id="cart-list"></ul>
-        <p>الإجمالي: <span id="total">0</span> جنيه</p>
-        <input type="text" id="name" placeholder="الاسم">
-        <input type="tel" id="phone" placeholder="الهاتف">
-        <input type="text" id="address" placeholder="العنوان">
-        <button class="buy-btn" onclick="sendOrder()">إرسال واتساب</button>
-    </div>
+<div class="cart-box">
+    <h3>🛒 سلة الطلبات</h3>
+    <ul id="cart-list"></ul>
+    <p>الإجمالي: <span id="total">0</span> جنيه</p>
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="text" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="address" placeholder="العنوان">
+    <button class="buy-btn" onclick="sendOrder()">إرسال واتساب</button>
 </div>
 
 <script>
     let cart = []; let total = 0;
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
+    
+    function filter(cat) {
+        document.querySelectorAll('.card').forEach(item => {
+            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none";
+        });
     }
+
     function addItem(name, price) {
         cart.push(name); total += price;
-        document.getElementById("cart-list").innerHTML += `<li>${name} (${price})</li>`;
+        document.getElementById("cart-list").innerHTML += `<li>${name} - ${price}ج</li>`;
         document.getElementById("total").innerText = total;
-        alert("تمت الإضافة!");
     }
+
     function sendOrder() {
-        let name = document.getElementById('name').value;
-        let phone = document.getElementById('phone').value;
-        let text = `طلب جديد: ${name}, ${phone}, ${cart.join(", ")}, الإجمالي: ${total}`;
+        let text = `طلب جديد: ${cart.join(", ")} | الإجمالي: ${total} | الاسم: ${document.getElementById('name').value}`;
         window.open("https://wa.me/201064031909?text=" + encodeURIComponent(text));
     }
 </script>
