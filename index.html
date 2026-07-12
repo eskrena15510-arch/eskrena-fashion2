@@ -1,4 +1,84 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>MGstor</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
+        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; }
+        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+        .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+        .del-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">MGstor 🎁</h1>
+
+<!-- شريط الفلتر -->
+<div class="nav-bar">
+    <button class="nav-btn" onclick="filter('all')">الكل</button>
+    <button class="nav-btn" onclick="filter('box')">🎁 بوكسات</button>
+    <button class="nav-btn" onclick="filter('bracelet')">📿 أساور</button>
+    <button class="nav-btn" onclick="filter('necklace')">💎 سلاسل</button>
+    <button class="nav-btn" onclick="filter('ring')">💍 خواتم</button>
+</div>
+
+<!-- السلة -->
+<div class="cart-box">
+    <h3>🛒 سلة طلباتك</h3>
+    <ul id="cart-list"></ul>
+    <p>الإجمالي: <span id="total" style="color:red; font-weight:bold;">0</span> ج</p>
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="tel" id="phone" placeholder="الهاتف">
+    <input type="text" id="address" placeholder="العنوان">
+    <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
+</div>
+
+<!-- المنتجات -->
+<div id="products">
+    <div class="card bracelet"><img src="IMG_3010.jpeg"><h3>أسورة كابلز 1</h3><p>150 ج</p><button onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_3011.jpeg"><h3>أسورة كابلز 2</h3><p>150 ج</p><button onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button></div>
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 ج</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>أسورة آية الكرسي</h3><p>120 ج</p><button onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>أسورة كارتير</h3><p>180 ج</p><button onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 ج</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 ج</p><button onclick="addItem('سلسلة حروف', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 ج</p><button onclick="addItem('سلسلة أسماء', 170)">أضف للسلة</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 ج</p><button onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring1.jpg"><h3>خاتم ذهبي</h3><p>300 ج</p><button onclick="addItem('خاتم ذهبي', 300)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring2.jpg"><h3>خاتم مرصع</h3><p>350 ج</p><button onclick="addItem('خاتم مرصع', 350)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring3.jpg"><h3>خاتم فضة</h3><p>280 ج</p><button onclick="addItem('خاتم فضة', 280)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring4.jpg"><h3>خاتم خطوبة</h3><p>400 ج</p><button onclick="addItem('خاتم خطوبة', 400)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain1.jpg"><h3>سلسلة لؤلؤ</h3><p>200 ج</p><button onclick="addItem('سلسلة لؤلؤ', 200)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain2.jpg"><h3>سلسلة دلاية</h3><p>180 ج</p><button onclick="addItem('سلسلة دلاية', 180)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain3.jpg"><h3>سلسلة مرصعة</h3><p>250 ج</p><button onclick="addItem('سلسلة مرصعة', 250)">أضف للسلة</button></div>
+</div>
+
+<script>
+    let cart = []; let total = 0;
+    function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
+    function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
+    function renderCart() { 
+        let list = document.getElementById("cart-list"); list.innerHTML = ""; 
+        cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`; }); 
+        document.getElementById("total").innerText = total; 
+    }
+    function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
+    function sendOrder() { 
+        let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; 
+        if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; } 
+        window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`); 
+    }
+</script>
+</body>
+</html>
+ html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
