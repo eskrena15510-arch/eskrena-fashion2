@@ -42,55 +42,20 @@
 </div>
 
 <div id="products">
-    <!-- مثال لمنتج (كرر هذا الـ div لكل منتجاتك) -->
-    <div class="card bracelet">
-        <div class="slider">
-            <img src="IMG_3010.jpeg" class="active">
-            <img src="IMG_3011.jpeg">
-            <img src="IMG_3014.jpeg">
-        </div>
-        <div class="nav-arrows">
-            <button onclick="prev(this)">⬅</button>
-            <button onclick="next(this)">➡</button>
-        </div>
-        <h3>أساور كابلز</h3><p>150 ج</p>
-        <button onclick="addItem('أساور كابلز', 150)">أضف للسلة 🛒</button>
+    <div class="card bracelet"><div class="slider"><img src="IMG_3010.jpeg" class="active"><img src="IMG_3011.jpeg"><img src="IMG_3014.jpeg"></div><div class="nav-arrows"><button onclick="prev(this)">⬅</button><button onclick="next(this)">➡</button></div><h3>أسورة كابلز</h3><p>150 ج</p><button onclick="addItem('أسورة كابلز', 150)">أضف للسلة 🛒</button></div>
+    <div class="card box"><div class="slider"><img src="box1.png" class="active"><img src="box1.png"><img src="box1.png"></div><div class="nav-arrows"><button onclick="prev(this)">⬅</button><button onclick="next(this)">➡</button></div><h3>بوكس هدايا</h3><p>600 ج</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><div class="slider"><img src="ring1.jpg" class="active"><img src="ring1.jpg"><img src="ring1.jpg"></div><div class="nav-arrows"><button onclick="prev(this)">⬅</button><button onclick="next(this)">➡</button></div><h3>خاتم ذهبي</h3><p>300 ج</p><button onclick="addItem('خاتم ذهبي', 300)">أضف للسلة 🛒</button></div>
     </div>
-    
-    <!-- هنا ضع باقي المنتجات بنفس الهيكل -->
-</div>
 
 <script>
-    function next(btn) { 
-        let slider = btn.parentElement.parentElement.querySelector('.slider');
-        let imgs = Array.from(slider.querySelectorAll('img'));
-        let active = slider.querySelector('img.active');
-        let index = imgs.indexOf(active);
-        active.classList.remove('active');
-        imgs[(index + 1) % imgs.length].classList.add('active');
-    }
-    function prev(btn) { 
-        let slider = btn.parentElement.parentElement.querySelector('.slider');
-        let imgs = Array.from(slider.querySelectorAll('img'));
-        let active = slider.querySelector('img.active');
-        let index = imgs.indexOf(active);
-        active.classList.remove('active');
-        imgs[(index - 1 + imgs.length) % imgs.length].classList.add('active');
-    }
+    function next(btn) { let slider = btn.parentElement.parentElement.querySelector('.slider'); let imgs = Array.from(slider.querySelectorAll('img')); let active = slider.querySelector('img.active'); let index = imgs.indexOf(active); active.classList.remove('active'); imgs[(index + 1) % imgs.length].classList.add('active'); }
+    function prev(btn) { let slider = btn.parentElement.parentElement.querySelector('.slider'); let imgs = Array.from(slider.querySelectorAll('img')); let active = slider.querySelector('img.active'); let index = imgs.indexOf(active); active.classList.remove('active'); imgs[(index - 1 + imgs.length) % imgs.length].classList.add('active'); }
     let cart = []; let total = 0;
     function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
     function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
-    function renderCart() { 
-        let list = document.getElementById("cart-list"); list.innerHTML = ""; 
-        cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`; }); 
-        document.getElementById("total").innerText = total; 
-    }
+    function renderCart() { let list = document.getElementById("cart-list"); list.innerHTML = ""; cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`; }); document.getElementById("total").innerText = total; }
     function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
-    function sendOrder() { 
-        let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value;
-        if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; }
-        window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`);
-    }
+    function sendOrder() { let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; } window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`); }
 </script>
 </body>
 </html>
