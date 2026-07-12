@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGstor | متجر الهدايا</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
-        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-btn { background: #333; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap; font-weight: bold; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
+        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; }
+        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
         .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
         .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
-        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        ul { list-style: none; padding: 0; margin-top: 10px; }
-        li { margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        li { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 5px 0; }
         .del-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
@@ -42,50 +41,30 @@
 
 <div id="products">
     <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
-    <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p>180 جنيه</p><button onclick="addItem('اسورة كارتير', 180)">أضف للسلة 🛒</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>أسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
     <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
     <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 جنيه</p><button onclick="addItem('سلسلة حروف', 150)">أضف للسلة 🛒</button></div>
     <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 جنيه</p><button onclick="addItem('سلسلة أسماء', 170)">أضف للسلة 🛒</button></div>
+    <div class="card necklace"><img src="chain4.jpg"><h3>سلسلة كريستال</h3><p>160 جنيه</p><button onclick="addItem('سلسلة كريستال', 160)">أضف للسلة 🛒</button></div>
     <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 جنيه</p><button onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><img src="ring2.jpg"><h3>خاتم ملكي</h3><p>300 جنيه</p><button onclick="addItem('خاتم ملكي', 300)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><img src="ring3.jpg"><h3>خاتم فص زركون</h3><p>220 جنيه</p><button onclick="addItem('خاتم فص زركون', 220)">أضف للسلة 🛒</button></div>
+    <div class="card ring"><img src="ring4.jpg"><h3>خاتم الحب</h3><p>280 جنيه</p><button onclick="addItem('خاتم الحب', 280)">أضف للسلة 🛒</button></div>
 </div>
 
 <script>
     let cart = []; let total = 0;
-
-    function addItem(name, price) {
-        cart.push({name, price});
-        total += price;
-        renderCart();
-    }
-
-    function removeItem(index) {
-        total -= cart[index].price;
-        cart.splice(index, 1);
-        renderCart();
-    }
-
+    function addItem(name, price) { cart.push({name, price}); total += price; renderCart(); }
+    function removeItem(index) { total -= cart[index].price; cart.splice(index, 1); renderCart(); }
     function renderCart() {
-        let list = document.getElementById("cart-list");
-        list.innerHTML = "";
-        cart.forEach((item, index) => {
-            list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`;
-        });
+        let list = document.getElementById("cart-list"); list.innerHTML = "";
+        cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`; });
         document.getElementById("total").innerText = total;
     }
-
-    function filter(cat) {
-        document.querySelectorAll('.card').forEach(item => {
-            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none";
-        });
-    }
-
+    function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
     function sendOrder() {
-        let name = document.getElementById('name').value;
-        let phone = document.getElementById('phone').value;
-        let addr = document.getElementById('address').value;
+        let name = document.getElementById('name').value; let phone = document.getElementById('phone').value; let addr = document.getElementById('address').value;
         if(!name || !phone || !addr) { alert("يرجى ملء بيانات التوصيل!"); return; }
-        
         let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${addr}`;
         window.open("https://wa.me/201064031909?text=" + msg);
     }
