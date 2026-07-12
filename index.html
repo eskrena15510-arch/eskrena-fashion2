@@ -2,51 +2,49 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGstor | متجر الهدايا والإكسسوارات</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<button class="floating-cart" onclick="toggleCart()">🛒 (<span id="cartCount">0</span>)</button>
+    <button class="floating-cart" onclick="openCart()">🛒 السلة (<span id="cartCount">0</span>)</button>
 
-<div id="cartBox" class="cart-box hidden">
-    <button class="close-btn" onclick="toggleCart()">✖</button>
-    <h3>سلة المشتريات</h3>
-    <div id="cartItemsList"></div>
-    <div class="cart-total">الإجمالي: <span id="totalPrice">0</span> جنيه</div>
-    <input type="text" id="clientName" placeholder="الاسم الكريم">
-    <input type="tel" id="clientPhone" placeholder="رقم الهاتف">
-    <button class="order-btn" onclick="checkout()">تأكيد الطلب عبر واتساب</button>
-</div>
-
-<header>
-    <h1>MGstor</h1>
-    <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." onkeyup="filterProducts()">
-    <div class="categories">
-        <button onclick="filterCategory('all')">الكل</button>
-        <button onclick="filterCategory('box')">🎁 بوكسات</button>
-        <button onclick="filterCategory('bracelet')">📿 أساور</button>
-        <button onclick="filterCategory('necklace')">💎 سلاسل</button>
+    <div id="cartBox" class="cart-box" style="display:none;">
+        <button class="close-cart" onclick="closeCart()">✖ إغلاق</button>
+        <h3>سلة المشتريات</h3>
+        <div id="cartItems"></div>
+        <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
+        <input id="client-name" type="text" placeholder="الاسم بالكامل">
+        <input id="client-phone" type="tel" placeholder="رقم الهاتف">
+        <button class="order-btn" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
     </div>
-</header>
 
-<main id="products" class="grid-container">
-    <div class="product-card" data-category="box" data-name="بوكس هدايا">
-        <img src="box1.png" alt="بوكس">
-        <h3>بوكس هدايا</h3>
-        <p class="price">600 جنيه</p>
-        <button onclick="addToCart('بوكس هدايا', 600)">إضافة للسلة</button>
-    </div>
-    <div class="product-card" data-category="bracelet" data-name="اسورة كارتير">
-        <img src="cartier.jpg" alt="اسورة">
-        <h3>اسورة كارتير</h3>
-        <p class="price">180 جنيه</p>
-        <button onclick="addToCart('اسورة كارتير', 180)">إضافة للسلة</button>
-    </div>
-</main>
+    <section class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." onkeyup="searchProducts()">
+    </section>
 
-<script src="script.js"></script>
+    <section class="categories">
+        <button onclick="filterProducts('all')">الكل</button>
+        <button onclick="filterProducts('box')">🎁 بوكسات</button>
+        <button onclick="filterProducts('bracelet')">📿 أساور</button>
+        <button onclick="filterProducts('necklace')">💎 سلاسل</button>
+        <button onclick="filterProducts('ring')">💍 خواتم</button>
+        <button onclick="filterProducts('set')">👑 أطقم</button>
+    </section>
+
+    <section id="products" class="products">
+        <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p class="price">600 جنيه</p><button onclick="addToCart('بوكس هدايا MGstor', 600)">أضف للسلة 🛒</button></div>
+        <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p class="price">120 جنيه</p><button onclick="addToCart('اسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
+        <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p class="price">150 جنيه</p><button onclick="addToCart('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
+        <div class="card set"><img src="انسيال فان كليڤ.JPG"><h3>طقم فان كليف</h3><p class="price">200 جنيه</p><button onclick="addToCart('طقم فان كليف', 200)">أضف للسلة 🛒</button></div>
+        <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p class="price">150 جنيه</p><button onclick="addToCart('سلسلة حروف', 150)">أضف للسلة 🛒</button></div>
+        <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم (أنت عمري)</h3><p class="price">250 جنيه</p><button onclick="addToCart('خاتم أنت عمري', 250)">أضف للسلة 🛒</button></div>
+        <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p class="price">180 جنيه</p><button onclick="addToCart('اسورة كارتير', 180)">أضف للسلة 🛒</button></div>
+        <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p class="price">170 جنيه</p><button onclick="addToCart('سلسلة أسماء', 170)">أضف للسلة 🛒</button></div>
+        <div class="card set"><img src="gift.jpg"><h3>طقم هدايا</h3><p class="price">350 جنيه</p><button onclick="addToCart('طقم هدايا', 350)">أضف للسلة 🛒</button></div>
+        <div class="card accessories"><img src="keychain.jpg"><h3>ميدالية صور</h3><p class="price">120 جنيه</p><button onclick="addToCart('ميدالية صور', 120)">أضف للسلة 🛒</button></div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
