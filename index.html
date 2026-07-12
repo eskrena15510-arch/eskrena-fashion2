@@ -9,7 +9,13 @@
         .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; }
         .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
         .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+        
+        /* السلايدر */
+        .slider { position: relative; width: 100%; height: 250px; overflow: hidden; border-radius: 12px; margin-bottom: 10px; }
+        .slider img { display: none; width: 100%; height: 100%; object-fit: cover; }
+        .slider img.active { display: block; }
+        .nav-arrows { display: flex; justify-content: space-between; margin-bottom: 10px; }
+
         .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
         .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
         input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
@@ -33,35 +39,52 @@
     <h3>🛒 سلة طلباتك</h3>
     <ul id="cart-list"></ul>
     <p>الإجمالي: <span id="total" style="color:red; font-weight:bold;">0</span> جنيه</p>
-    <input type="text" id="name" placeholder="الاسم بالكامل">
-    <input type="tel" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="tel" id="phone" placeholder="الهاتف">
     <input type="text" id="address" placeholder="العنوان">
     <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
 </div>
 
 <div id="products">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 ج</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>أسورة آية الكرسي</h3><p>120 ج</p><button onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
-    <div class="card bracelet"><img src="cartier.jpg"><h3>أسورة كارتير</h3><p>180 ج</p><button onclick="addItem('أسورة كارتير', 180)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p>150 ج</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 ج</p><button onclick="addItem('سلسلة حروف', 150)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 ج</p><button onclick="addItem('سلسلة أسماء', 170)">أضف للسلة 🛒</button></div>
-    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 ج</p><button onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة 🛒</button></div>
-
-    <div class="card ring"><img src="ring1.jpg"><h3>خاتم ذهبي</h3><p>300 ج</p><button onclick="addItem('خاتم ذهبي', 300)">أضف للسلة 🛒</button></div>
-    <div class="card ring"><img src="ring2.jpg"><h3>خاتم مرصع</h3><p>350 ج</p><button onclick="addItem('خاتم مرصع', 350)">أضف للسلة 🛒</button></div>
-    <div class="card ring"><img src="ring3.jpg"><h3>خاتم فضة</h3><p>280 ج</p><button onclick="addItem('خاتم فضة', 280)">أضف للسلة 🛒</button></div>
-    <div class="card ring"><img src="ring4.jpg"><h3>خاتم خطوبة</h3><p>400 ج</p><button onclick="addItem('خاتم خطوبة', 400)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="chain1.jpg"><h3>سلسلة لؤلؤ</h3><p>200 ج</p><button onclick="addItem('سلسلة لؤلؤ', 200)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="chain2.jpg"><h3>سلسلة دلاية</h3><p>180 ج</p><button onclick="addItem('سلسلة دلاية', 180)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="chain3.jpg"><h3>سلسلة مرصعة</h3><p>250 ج</p><button onclick="addItem('سلسلة مرصعة', 250)">أضف للسلة 🛒</button></div>
-    <div class="card necklace"><img src="chain4.jpg"><h3>سلسلة نجوم</h3><p>190 ج</p><button onclick="addItem('سلسلة نجوم', 190)">أضف للسلة 🛒</button></div>
-    <div class="card box"><img src="box2.jpg"><h3>بوكس ديلوكس</h3><p>800 ج</p><button onclick="addItem('بوكس ديلوكس', 800)">أضف للسلة 🛒</button></div>
-    <div class="card bracelet"><img src="brac2.jpg"><h3>أسورة خرز</h3><p>90 ج</p><button onclick="addItem('أسورة خرز', 90)">أضف للسلة 🛒</button></div>
+    <!-- مثال لمنتج بصورتين (أضف هذا لكل منتج لديك) -->
+    <div class="card box">
+        <div class="slider">
+            <img src="box1.png" class="active">
+            <img src="box1-2.jpg">
+        </div>
+        <div class="nav-arrows">
+            <button onclick="prev(this)">⬅</button>
+            <button onclick="next(this)">➡</button>
+        </div>
+        <h3>بوكس هدايا ديلوكس</h3><p>600 ج</p>
+        <button onclick="addItem('بوكس ديلوكس', 600)">أضف للسلة 🛒</button>
+    </div>
+    
+    <!-- يمكنك تكرار هذا النمط لكل منتج -->
 </div>
 
 <script>
     let cart = []; let total = 0;
+    
+    // دوال السلايدر
+    function next(btn) {
+        let slider = btn.parentElement.parentElement.querySelector('.slider');
+        let imgs = slider.querySelectorAll('img');
+        let active = slider.querySelector('img.active');
+        let next = active.nextElementSibling || imgs[0];
+        active.classList.remove('active');
+        next.classList.add('active');
+    }
+    function prev(btn) {
+        let slider = btn.parentElement.parentElement.querySelector('.slider');
+        let imgs = slider.querySelectorAll('img');
+        let active = slider.querySelector('img.active');
+        let prev = active.previousElementSibling || imgs[imgs.length - 1];
+        active.classList.remove('active');
+        prev.classList.add('active');
+    }
+
+    // دوال المتجر
     function addItem(name, price) { cart.push({name, price}); total += price; renderCart(); }
     function removeItem(index) { total -= cart[index].price; cart.splice(index, 1); renderCart(); }
     function renderCart() {
@@ -72,8 +95,8 @@
     function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
     function sendOrder() {
         let name = document.getElementById('name').value; let phone = document.getElementById('phone').value; let addr = document.getElementById('address').value;
-        if(!name || !phone || !addr) { alert("يرجى ملء بيانات التوصيل!"); return; }
-        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${addr}`;
+        if(!name || !phone || !addr) { alert("يرجى ملء البيانات!"); return; }
+        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${addr}`;
         window.open("https://wa.me/201064031909?text=" + msg);
     }
 </script>
