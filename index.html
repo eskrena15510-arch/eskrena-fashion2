@@ -636,7 +636,18 @@ onclick="addToCart('سلسلة حروف',150)">
 <!-- سلة المشتريات -->
 <!-- ===================== -->
 
-<div class="cart-box">
+<div class="cart-total">
+
+    الإجمالي:
+    <span id="cartTotalPrice">0</span>
+    جنيه
+
+</div>
+
+
+<button class="order-btn" onclick="submitOrder()">
+    تأكيد الطلب
+</button>
 
     <button class="cart-btn" onclick="openCart()"
         🛒 السلة
