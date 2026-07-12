@@ -3,65 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MGstor | المتجر الأنيق</title>
+    <title>MGstor | متجر احترافي</title>
     <style>
-        :root { --main-color: #25d366; --bg-color: #f8f9fa; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); margin: 0; padding: 15px; }
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 10px; }
         
-        h1 { text-align: center; color: #333; margin-bottom: 20px; }
+        /* السلة */
+        .cart-section { background: #fff; padding: 15px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .cart-section input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 8px; }
+        .btn-order { width: 100%; padding: 12px; background: #25d366; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
+
+        /* شبكة المنتجات - ده اللي هيخلي الشكل احترافي */
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         
-        /* تصميم السلة */
-        .cart-box { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .cart-box h3 { margin-top: 0; color: #444; }
-        .buy-btn { background: var(--main-color); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .buy-btn:hover { background: #1ebd5d; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; }
-        
-        /* تصميم المنتجات (الشبكة الاحترافية) */
-        #products { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        .card { background: white; padding: 12px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 15px; margin-bottom: 10px; }
-        .card h3 { font-size: 14px; margin: 5px 0; color: #222; }
-        .card p { font-size: 13px; color: #888; margin-bottom: 10px; }
-        .add-btn { background: #333; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 12px; }
+        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; padding: 10px; }
+        .product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
+        .product-card h3 { font-size: 14px; margin: 10px 0 5px; }
+        .product-card p { font-size: 13px; color: #666; margin: 0 0 10px; }
+        .btn-add { width: 100%; padding: 8px; background: #333; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<h1>MGstor 🎁</h1>
+<h2 style="text-align: center;">MGstor 🎁</h2>
 
-<div class="cart-box">
-    <h3>🛒 سلة طلباتك</h3>
-    <ul id="cart-list" style="list-style: none; padding: 0;"></ul>
-    <p>الإجمالي: <span id="total" style="color:var(--main-color); font-weight:bold;">0</span> ج</p>
+<div class="cart-section">
+    <h3>🛒 سلة المشتريات</h3>
+    <ul id="cart-list" style="padding-right: 20px; font-size: 14px;"></ul>
+    <p>الإجمالي: <span id="total" style="color: #d32f2f; font-weight: bold;">0</span> جنيه</p>
     <input type="text" id="name" placeholder="الاسم الكريم">
     <input type="tel" id="phone" placeholder="رقم الهاتف">
-    <input type="text" id="address" placeholder="العنوان بالتفصيل">
-    <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
+    <input type="text" id="address" placeholder="عنوان التوصيل">
+    <button class="btn-order" onclick="sendOrder()">إرسال الطلب عبر واتساب</button>
 </div>
 
-<div id="products">
-    <!-- يمكنك تكرار هذا الكود لكل منتجاتك -->
-    <div class="card"><img src="IMG_3010.jpeg"><h3>أسورة كابلز 1</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button></div>
-    <div class="card"><img src="IMG_3011.jpeg"><h3>أسورة كابلز 2</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button></div>
-    <div class="card"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 ج</p><button class="add-btn" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
-    <div class="card"><img src="cartier.jpg"><h3>أسورة كارتير</h3><p>180 ج</p><button class="add-btn" onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button></div>
-    <!-- أضف باقي المنتجات بنفس التنسيق هنا -->
+<div class="products-grid" id="products">
+    <!-- مثال لمنتج: كرر هذا البلوك لكل المنتجات -->
+    <div class="product-card">
+        <img src="IMG_3010.jpeg" alt="product">
+        <h3>أسورة كابلز</h3>
+        <p>150 جنيه</p>
+        <button class="btn-add" onclick="addItem('أسورة كابلز', 150)">أضف للسلة</button>
+    </div>
+    <!-- انسخ السطور اللي فوق وكررها وغير اسم الصورة والبيانات -->
 </div>
 
 <script>
     let cart = []; let total = 0;
-    function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
-    function renderCart() { 
-        let list = document.getElementById("cart-list"); list.innerHTML = ""; 
-        cart.forEach((item) => { list.innerHTML += `<li style="padding:5px 0; border-bottom:1px solid #f0f0f0;">${item.name} - ${item.price} ج</li>`; }); 
-        document.getElementById("total").innerText = total; 
+    function addItem(name, price) {
+        cart.push({name, price});
+        total += price;
+        updateCart();
     }
-    function sendOrder() { 
-        let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; 
-        if(!n || !ph || !ad) { alert("من فضلك أكمل بيانات الطلب"); return; } 
-        window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`); 
+    function updateCart() {
+        let list = document.getElementById('cart-list');
+        list.innerHTML = cart.map(item => `<li>${item.name} - ${item.price} ج</li>`).join('');
+        document.getElementById('total').innerText = total;
+    }
+    function sendOrder() {
+        let n = document.getElementById('name').value;
+        let p = document.getElementById('phone').value;
+        let a = document.getElementById('address').value;
+        if(!n || !p || !a) return alert("من فضلك املأ البيانات");
+        let msg = `طلب جديد من ${n}%0Aالهاتف: ${p}%0Aالعنوان: ${a}%0Aالطلبات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه`;
+        window.open(`https://wa.me/201064031909?text=${msg}`);
     }
 </script>
 </body>
