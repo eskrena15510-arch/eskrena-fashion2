@@ -3,56 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>MGstor | متجر الهدايا والإكسسوارات</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS المدمج */
+        body { font-family: 'Cairo', sans-serif; background: #f4f4f4; margin: 0; }
+        .floating-cart { position: fixed; top: 20px; left: 20px; z-index: 1000; padding: 10px 20px; background: #ff4757; color: white; border: none; border-radius: 25px; cursor: pointer; }
+        .cart-box { position: fixed; top: 0; right: 0; width: 300px; height: 100%; background: #fff; padding: 20px; z-index: 1001; box-shadow: -5px 0 10px rgba(0,0,0,0.2); display: none; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: #fff; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .card button { background: #2d3436; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+    </style>
 </head>
 <body>
-<div id="cartBox" class="cart-box" style="display:none; position:fixed; top:10%; right:10%; width:300px; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999; box-shadow:0 0 10px rgba(0,0,0,0.2);">
-    <button onclick="closeCart()" style="float:left;">✖</button>
+
+<button class="floating-cart" onclick="document.getElementById('cartBox').style.display='block'">🛒 السلة (<span id="cartCount">0</span>)</button>
+
+<div id="cartBox" class="cart-box">
+    <button onclick="document.getElementById('cartBox').style.display='none'">✖ إغلاق</button>
     <h3>سلة المشتريات</h3>
     <div id="cartItems"></div>
     <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
-    <input id="client-name" type="text" placeholder="الاسم بالكامل" style="width:100%; margin:5px 0;">
-    <button class="order-btn" onclick="submitOrder()" style="width:100%; background:#25d366; color:white; border:none; padding:10px;">تأكيد الطلب عبر واتساب</button>
+    <input id="client-name" type="text" placeholder="الاسم" style="width:100%; margin:10px 0;">
+    <button onclick="submitOrder()" style="width:100%; background:#25d366; color:white; border:none; padding:10px;">تأكيد الطلب</button>
 </div>
 
-    <button class="floating-cart" onclick="openCart()">🛒 السلة (<span id="cartCount">0</span>)</button>
+<section class="products">
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p>600 جنيه</p><button onclick="addToCart('بوكس هدايا MGstor', 600)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addToCart('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addToCart('سلسلة قلب', 150)">أضف للسلة</button></div>
+</section>
 
-    <div id="cartBox" class="cart-box" style="display:none;">
-        <button class="close-cart" onclick="closeCart()">✖ إغلاق</button>
-        <h3>سلة المشتريات</h3>
-        <div id="cartItems"></div>
-        <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
-        <input id="client-name" type="text" placeholder="الاسم بالكامل">
-        <input id="client-phone" type="tel" placeholder="رقم الهاتف">
-        <button class="order-btn" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
-    </div>
-
-    <section class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." onkeyup="searchProducts()">
-    </section>
-
-    <section class="categories">
-        <button onclick="filterProducts('all')">الكل</button>
-        <button onclick="filterProducts('box')">🎁 بوكسات</button>
-        <button onclick="filterProducts('bracelet')">📿 أساور</button>
-        <button onclick="filterProducts('necklace')">💎 سلاسل</button>
-        <button onclick="filterProducts('ring')">💍 خواتم</button>
-        <button onclick="filterProducts('set')">👑 أطقم</button>
-    </section>
-
-    <section id="products" class="products">
-        <div class="card box"><img src="box1.png"><h3>بوكس هدايا MGstor</h3><p class="price">600 جنيه</p><button onclick="addToCart('بوكس هدايا MGstor', 600)">أضف للسلة 🛒</button></div>
-        <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p class="price">120 جنيه</p><button onclick="addToCart('اسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
-        <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب مميزة</h3><p class="price">150 جنيه</p><button onclick="addToCart('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
-        <div class="card set"><img src="انسيال فان كليڤ.JPG"><h3>طقم فان كليف</h3><p class="price">200 جنيه</p><button onclick="addToCart('طقم فان كليف', 200)">أضف للسلة 🛒</button></div>
-        <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p class="price">150 جنيه</p><button onclick="addToCart('سلسلة حروف', 150)">أضف للسلة 🛒</button></div>
-        <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم (أنت عمري)</h3><p class="price">250 جنيه</p><button onclick="addToCart('خاتم أنت عمري', 250)">أضف للسلة 🛒</button></div>
-        <div class="card bracelet"><img src="cartier.jpg"><h3>اسورة كارتير</h3><p class="price">180 جنيه</p><button onclick="addToCart('اسورة كارتير', 180)">أضف للسلة 🛒</button></div>
-        <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p class="price">170 جنيه</p><button onclick="addToCart('سلسلة أسماء', 170)">أضف للسلة 🛒</button></div>
-        <div class="card set"><img src="gift.jpg"><h3>طقم هدايا</h3><p class="price">350 جنيه</p><button onclick="addToCart('طقم هدايا', 350)">أضف للسلة 🛒</button></div>
-        <div class="card accessories"><img src="keychain.jpg"><h3>ميدالية صور</h3><p class="price">120 جنيه</p><button onclick="addToCart('ميدالية صور', 120)">أضف للسلة 🛒</button></div>
-    </section>
-
-    <script src="script.js"></script>
+<script>
+    /* JavaScript المدمج */
+    let cart = [];
+    let total = 0;
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+        document.getElementById('cartCount').innerText = cart.length;
+        document.getElementById('cartTotalPrice').innerText = total;
+        document.getElementById('cartItems').innerHTML += `<p>${name} - ${price} جنيه</p>`;
+        alert("تمت الإضافة للسلة!");
+    }
+    function submitOrder() {
+        let name = document.getElementById('client-name').value;
+        let msg = `طلب جديد من ${name}. الإجمالي: ${total} جنيه.`;
+        window.open(`https://wa.me/201064031909?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>
 </body>
 </html>
