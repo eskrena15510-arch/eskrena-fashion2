@@ -7,12 +7,12 @@
     <style>
         body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
         
-        /* الشريط العلوي للأصناف */
-        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; gap: 10px; white-space: nowrap; }
-        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        /* الشريط العلوي */
+        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; gap: 10px; }
+        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
         
-        /* تصميم المنتجات */
-        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        /* المنتجات */
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
         
         /* السلة */
@@ -30,43 +30,49 @@
     <button class="nav-btn" onclick="filter('box')">🎁 بوكسات</button>
     <button class="nav-btn" onclick="filter('bracelet')">📿 أساور</button>
     <button class="nav-btn" onclick="filter('necklace')">💎 سلاسل</button>
-    <button class="nav-btn" onclick="filter('ring')">💍 خواتم</button>
-</div>
-
-<div id="products">
-    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
-    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة</button></div>
-    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button></div>
 </div>
 
 <div class="cart-box">
-    <h3>🛒 سلة الطلبات</h3>
-    <ul id="cart-list"></ul>
-    <p>الإجمالي: <span id="total">0</span> جنيه</p>
+    <h3>🛒 سلة طلباتك</h3>
+    <ul id="cart-list" style="text-align: right;"></ul>
+    <p>الإجمالي: <span id="total" style="color:red;">0</span> جنيه</p>
     <input type="text" id="name" placeholder="الاسم">
     <input type="text" id="phone" placeholder="رقم الهاتف">
     <input type="text" id="address" placeholder="العنوان">
-    <button class="buy-btn" onclick="sendOrder()">إرسال واتساب</button>
+    <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
+</div>
+
+<div id="products">
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 جنيه</p><button onclick="addItem('بوكس هدايا', 600)">أضف للسلة 🛒</button></div>
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>اسورة آية الكرسي</h3><p>120 جنيه</p><button onclick="addItem('اسورة آية الكرسي', 120)">أضف للسلة 🛒</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 جنيه</p><button onclick="addItem('سلسلة قلب', 150)">أضف للسلة 🛒</button></div>
 </div>
 
 <script>
     let cart = []; let total = 0;
-    
+
+    function addItem(name, price) {
+        cart.push({name, price});
+        total += price;
+        // تحديث قائمة السلة
+        let list = document.getElementById("cart-list");
+        let li = document.createElement("li");
+        li.innerText = `${name} - ${price} جنيه`;
+        list.appendChild(li);
+        // تحديث الإجمالي
+        document.getElementById("total").innerText = total;
+        alert("تمت الإضافة للسلة!");
+    }
+
     function filter(cat) {
         document.querySelectorAll('.card').forEach(item => {
             item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none";
         });
     }
 
-    function addItem(name, price) {
-        cart.push(name); total += price;
-        document.getElementById("cart-list").innerHTML += `<li>${name} - ${price}ج</li>`;
-        document.getElementById("total").innerText = total;
-    }
-
     function sendOrder() {
-        let text = `طلب جديد: ${cart.join(", ")} | الإجمالي: ${total} | الاسم: ${document.getElementById('name').value}`;
-        window.open("https://wa.me/201064031909?text=" + encodeURIComponent(text));
+        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${document.getElementById('name').value}`;
+        window.open("https://wa.me/201064031909?text=" + msg);
     }
 </script>
 
