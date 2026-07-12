@@ -359,3 +359,43 @@ window.addEventListener("load",()=>{
     updateCart();
 
 });
+function submitOrder(){
+
+    if(cart.length === 0){
+
+        showToast("السلة فارغة");
+
+        return;
+
+    }
+
+
+    let message = "طلب جديد من MGstor%0A%0A";
+
+
+    cart.forEach(item=>{
+
+        message += 
+        `المنتج: ${item.name}%0A`+
+        `السعر: ${item.price} جنيه%0A`+
+        `الكمية: ${item.quantity}%0A%0A`;
+
+    });
+
+
+    let total = cart.reduce((sum,item)=>{
+
+        return sum + (item.price * item.quantity);
+
+    },0);
+
+
+    message += "الإجمالي: " + total + " جنيه";
+
+
+    window.open(
+        "https://wa.me/201064031909?text=" + message,
+        "_blank"
+    );
+
+}
