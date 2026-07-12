@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="cartBox" class="cart-box" style="display:none; position:fixed; top:10%; right:10%; width:300px; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+    <button onclick="closeCart()" style="float:left;">✖</button>
+    <h3>سلة المشتريات</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
+    <input id="client-name" type="text" placeholder="الاسم بالكامل" style="width:100%; margin:5px 0;">
+    <button class="order-btn" onclick="submitOrder()" style="width:100%; background:#25d366; color:white; border:none; padding:10px;">تأكيد الطلب عبر واتساب</button>
+</div>
 
     <button class="floating-cart" onclick="openCart()">🛒 السلة (<span id="cartCount">0</span>)</button>
 
