@@ -1,4 +1,88 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGstor | متجر أنيق</title>
+    <style>
+        :root {
+            --primary: #25d366; /* أخضر الواتساب */
+            --dark: #2c3e50;    /* كحلي غامق فخم */
+            --light: #f4f7f6;   /* رمادي فاتح للخلفية */
+            --accent: #e74c3c;  /* أحمر للتنبيهات والأسعار */
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--light); margin: 0; padding: 10px; }
+        
+        /* شريط الفلتر الملون */
+        .nav-bar { display: flex; overflow-x: auto; padding-bottom: 15px; gap: 10px; }
+        .nav-btn { background: white; border: 2px solid var(--dark); color: var(--dark); padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .nav-btn:active, .nav-btn:hover { background: var(--dark); color: white; }
+
+        /* كروت المنتجات */
+        .card { background: white; padding: 20px; border-radius: 25px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid var(--primary); }
+        .card img { width: 100%; max-height: 350px; object-fit: contain; border-radius: 15px; margin-bottom: 15px; }
+        .card h3 { color: var(--dark); font-size: 19px; margin: 10px 0; }
+        .card p { color: var(--accent); font-size: 17px; font-weight: bold; }
+        
+        /* الأزرار والسلة */
+        .add-btn { background: var(--dark); color: white; border: none; padding: 12px 35px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .add-btn:hover { background: var(--primary); }
+        
+        .cart-box { background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--primary); margin-bottom: 30px; }
+        .buy-btn { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; }
+        input { width: 100%; padding: 14px; margin: 8px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        h1 { color: var(--dark); text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>MGstor 🎁</h1>
+
+<div class="nav-bar">
+    <button class="nav-btn" onclick="filter('all')">الكل</button>
+    <button class="nav-btn" onclick="filter('box')">🎁 بوكسات</button>
+    <button class="nav-btn" onclick="filter('bracelet')">📿 أساور</button>
+    <button class="nav-btn" onclick="filter('necklace')">💎 سلاسل</button>
+    <button class="nav-btn" onclick="filter('ring')">💍 خواتم</button>
+</div>
+
+<div class="cart-box">
+    <h3 style="color:var(--dark);">🛒 سلة طلباتك</h3>
+    <ul id="cart-list" style="list-style:none; padding:0;"></ul>
+    <p>الإجمالي: <span id="total" style="color:var(--accent); font-size:20px; font-weight:bold;">0</span> ج</p>
+    <input type="text" id="name" placeholder="الاسم الكريم">
+    <input type="tel" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="address" placeholder="العنوان بالتفصيل">
+    <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
+</div>
+
+<div id="products">
+    <!-- المنتجات بنفس التنسيق السابق -->
+    <div class="card bracelet"><img src="IMG_3010.jpeg"><h3>أسورة كابلز 1</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_3011.jpeg"><h3>أسورة كابلز 2</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button></div>
+    <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 ج</p><button class="add-btn" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
+    <!-- يمكنك إكمال باقي المنتجات بنفس الطريقة -->
+</div>
+
+<script>
+    let cart = []; let total = 0;
+    function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
+    function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
+    function renderCart() { 
+        let list = document.getElementById("cart-list"); list.innerHTML = ""; 
+        cart.forEach((item, index) => { list.innerHTML += `<li style="padding:10px 0; border-bottom:1px solid #eee;">${item.name} - ${item.price} ج <button onclick="removeItem(${index})" style="background:none; border:none; color:var(--accent); cursor:pointer;">✕</button></li>`; }); 
+        document.getElementById("total").innerText = total; 
+    }
+    function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
+    function sendOrder() { 
+        let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; 
+        if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; } 
+        window.open("https://wa.me/201064031909?text=" + `طلب جديد من MGstor:%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}%0Aالطلبات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج`); 
+    }
+</script>
+</body>
+</html>
+ html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
