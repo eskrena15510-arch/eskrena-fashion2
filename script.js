@@ -1,115 +1,277 @@
 // ===============================
-// MGstor V2
+// MGstor Script
 // ===============================
 
 let cart = [];
 let favorites = [];
 
+
 // ===============================
-// تغيير صور المنتج
+// فتح وقفل السلة
 // ===============================
 
-function changeImage(imgId, images, direction) {
+function openCart(){
 
-    const img = document.getElementById(imgId);
+    let cartBox = document.getElementById("cartBox");
 
-    if (!img) return;
-
-    let current = images.indexOf(img.src.split("/").pop());
-
-    if (current === -1) current = 0;
-
-    current += direction;
-
-    if (current >= images.length) current = 0;
-
-    if (current < 0) current = images.length - 1;
-
-    img.src = images[current];
+    if(cartBox){
+        cartBox.classList.add("active");
+    }
 
 }
 
-// ===============================
-// البحث
-// ===============================
 
-function searchProducts() {
+function closeCart(){
 
-    let input = document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase();
+    let cartBox = document.getElementById("cartBox");
 
-    let cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-
-        let title = card
-            .querySelector("h3")
-            .innerText
-            .toLowerCase();
-
-        if (title.includes(input)) {
-
-            card.style.display = "flex";
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
+    if(cartBox){
+        cartBox.classList.remove("active");
+    }
 
 }
 
-// ===============================
-// الفلترة
-// ===============================
 
-function filterProducts(type){
+function toggleCart(){
 
-    let cards=document.querySelectorAll(".card");
+    let cartBox = document.getElementById("cartBox");
 
-    cards.forEach(card=>{
+    if(cartBox){
 
-        if(type==="all"){
-
-            card.style.display="flex";
-
-            return;
-
-        }
-
-        if(card.classList.contains(type)){
-
-            card.style.display="flex";
-
-        }
-
-        else{
-
-            card.style.display="none";
-
-        }
-
-    });
-
-}
-
-// ===============================
-// المفضلة
-// ===============================
-
-document.addEventListener("click",function(e){
-
-    if(e.target.classList.contains("favorite")){
-
-        e.target.classList.toggle("active");
+        cartBox.classList.toggle("active");
 
     }
 
-});
+}
+
+
+
+// ===============================
+// إضافة للسلة
+// ===============================
+
+function addToCart(name, price, image){
+
+
+    let product = cart.find(item => item.name === name);
+
+
+    if(product){
+
+        product.quantity++;
+
+    }
+
+    else{
+
+        cart.push({
+
+            name:name,
+
+            price:Number(price),
+
+            image:image,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCart();
+
+    showToast("تم إضافة المنتج للسلة 🛒");
+
+}
+
+
+
+// ===============================
+// تحديث السلة
+// ===============================
+
+function updateCart(){
+
+
+    let count = document.getElementById("cartCount");
+
+
+    if(count){
+
+        count.innerText = cart.reduce((a,b)=>a+b.quantity,0);
+
+    }
+
+
+
+    let items = document.getElementById("cartItems");
+
+
+    let total = document.getElementById("cartTotalPrice");
+
+
+
+    if(items){
+
+
+        items.innerHTML="";
+
+
+        let sum = 0;
+
+
+
+        cart.forEach((item,index)=>{
+
+
+            sum += item.price * item.quantity;
+
+
+
+            items.innerHTML += `
+
+            <div class="cart-product">
+
+
+                <img src="${item.image}">
+
+
+                <h4>${item.name}</h4>
+
+
+                <p>${item.price} جنيه</p>
+
+
+                <button onclick="changeQuantity(${index},-1)">
+                -
+                </button>
+
+
+                <span>
+                ${item.quantity}
+                </span>
+
+
+                <button onclick="changeQuantity(${index},1)">
+                +
+                </button>
+
+
+                <button onclick="removeCart(${index})">
+                🗑️
+                </button>
+
+
+            </div>
+
+            `;
+
+
+        });
+
+
+
+        if(total){
+
+            total.innerText=sum;
+
+        }
+
+
+    }
+
+}
+
+
+
+// ===============================
+// التحكم في الكمية
+// ===============================
+
+function changeQuantity(index,value){
+
+
+    cart[index].quantity += value;
+
+
+
+    if(cart[index].quantity <=0){
+
+        cart.splice(index,1);
+
+    }
+
+
+
+    saveCart();
+
+    updateCart();
+
+
+}
+
+
+
+// ===============================
+// حذف منتج
+// ===============================
+
+function removeCart(index){
+
+
+    cart.splice(index,1);
+
+
+    saveCart();
+
+    updateCart();
+
+
+}
+
+
+
+// ===============================
+// حفظ البيانات
+// ===============================
+
+function saveCart(){
+
+    localStorage.setItem(
+        "mg_cart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+
+// ===============================
+// تحميل السلة
+// ===============================
+
+window.onload=function(){
+
+
+    let oldCart = localStorage.getItem("mg_cart");
+
+
+    if(oldCart){
+
+        cart = JSON.parse(oldCart);
+
+    }
+
+
+    updateCart();
+
+
+}
+
+
 
 // ===============================
 // Toast
@@ -117,7 +279,9 @@ document.addEventListener("click",function(e){
 
 function showToast(message){
 
+
     let toast=document.querySelector(".toast");
+
 
     if(!toast){
 
@@ -129,9 +293,12 @@ function showToast(message){
 
     }
 
+
     toast.innerText=message;
 
+
     toast.classList.add("show");
+
 
     setTimeout(()=>{
 
@@ -139,327 +306,5 @@ function showToast(message){
 
     },2000);
 
-}
-// ===============================
-// السلة
-// ===============================
-
-function updateCart(){
-
-    let cartCount = document.getElementById("cartCount");
-
-    if(cartCount){
-
-        cartCount.innerText = cart.reduce((sum,item)=>{
-            return sum + item.quantity;
-        },0);
-
-    }
-
-
-    let cartItems = document.getElementById("cartItems");
-
-    let totalPrice = document.getElementById("cartTotalPrice");
-
-
-    if(cartItems){
-
-        cartItems.innerHTML = "";
-
-        let total = 0;
-
-
-        cart.forEach((item,index)=>{
-
-            total += item.price * item.quantity;
-
-
-            cartItems.innerHTML += `
-
-            <div class="cart-product">
-
-                <img src="${item.image}">
-
-                <h4>${item.name}</h4>
-
-                <p>${item.price} جنيه</p>
-
-
-                <button onclick="changeQuantity(${index},-1)">
-                    -
-                </button>
-
-
-                <span>
-                    ${item.quantity}
-                </span>
-
-
-                <button onclick="changeQuantity(${index},1)">
-                    +
-                </button>
-
-
-                <button onclick="removeCart(${index})">
-                    🗑️
-                </button>
-
-            </div>
-
-            `;
-
-        });
-
-
-        if(totalPrice){
-
-            totalPrice.innerText = total;
-
-        }
-
-    }
 
 }
-function changeQuantity(index,value){
-
-    cart[index].quantity += value;
-
-
-    if(cart[index].quantity <= 0){
-
-        cart.splice(index,1);
-
-    }
-
-
-    updateCart();
-
-}
-        exists.quantity++;
-
-    } else {
-
-        cart.push(product);
-
-    }
-
-    updateCart();
-
-    showToast("تم إضافة المنتج للسلة 🛒");
-
-}
-
-
-// ===============================
-// تحديث السلة
-// ===============================
-
-function updateCart(){
-
-    let cartCount = document.getElementById("cartCount");
-
-    if(cartCount){
-
-        let total = cart.reduce((sum,item)=>{
-
-            return sum + item.quantity;
-
-        },0);
-
-        cartCount.innerText = total;
-
-    }
-
-
-    let cartItems = document.getElementById("cartItems");
-
-    if(cartItems){
-
-        cartItems.innerHTML="";
-
-
-        cart.forEach((item,index)=>{
-
-            cartItems.innerHTML += `
-
-            <div class="cart-item">
-
-                <img src="${item.image}">
-
-                <div>
-
-                    <h4>${item.name}</h4>
-
-                    <p>${item.price} جنيه</p>
-
-                    <span>
-                    الكمية: ${item.quantity}
-                    </span>
-
-                </div>
-
-
-                <button onclick="removeCart(${index})">
-                    ❌
-                </button>
-
-            </div>
-
-            `;
-
-        });
-
-    }
-
-}
-
-
-// ===============================
-// حذف من السلة
-// ===============================
-
-function removeCart(index){
-
-    cart.splice(index,1);
-
-    updateCart();
-
-    showToast("تم حذف المنتج");
-
-}
-
-
-// ===============================
-// فتح وإغلاق السلة
-// ===============================
-
-function openCart(){
-
-    let box=document.getElementById("cartBox");
-
-    if(box){
-
-        box.classList.add("active");
-
-    }
-
-}
-
-
-function closeCart(){
-
-    let box=document.getElementById("cartBox");
-
-    if(box){
-
-        box.classList.remove("active");
-
-    }
-
-}
-// ===============================
-// المفضلة
-// ===============================
-
-function addFavorite(name){
-
-    if(!favorites.includes(name)){
-
-        favorites.push(name);
-
-        showToast("تمت الإضافة للمفضلة ❤️");
-
-    }
-
-    else{
-
-        favorites = favorites.filter(item => item !== name);
-
-        showToast("تم الحذف من المفضلة");
-
-    }
-
-}
-
-
-// ===============================
-// فتح تفاصيل المنتج
-// ===============================
-
-function openProduct(id){
-
-    window.location.href = "product.html?id=" + id;
-
-}
-
-
-// ===============================
-// زر القائمة في الموبايل
-// ===============================
-
-function toggleMenu(){
-
-    let menu=document.querySelector(".menu");
-
-    if(menu){
-
-        menu.classList.toggle("active");
-
-    }
-
-}
-
-
-// ===============================
-// حفظ السلة والمفضلة
-// ===============================
-
-window.addEventListener("beforeunload",()=>{
-
-    localStorage.setItem(
-        "mg_cart",
-        JSON.stringify(cart)
-    );
-
-
-    localStorage.setItem(
-        "mg_favorites",
-        JSON.stringify(favorites)
-    );
-
-});
-
-
-// ===============================
-// تحميل البيانات
-// ===============================
-
-window.addEventListener("load",()=>{
-
-
-    let savedCart =
-    localStorage.getItem("mg_cart");
-
-
-    let savedFav =
-    localStorage.getItem("mg_favorites");
-
-
-    if(savedCart){
-
-        cart = JSON.parse(savedCart);
-
-    }
-
-
-    if(savedFav){
-
-        favorites = JSON.parse(savedFav);
-
-    }
-
-
-    updateCart();
-
-
-});
