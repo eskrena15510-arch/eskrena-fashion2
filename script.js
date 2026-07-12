@@ -144,19 +144,97 @@ function showToast(message){
 // السلة
 // ===============================
 
-function addToCart(name, price, image){
+function updateCart(){
 
-    let product = {
-        name: name,
-        price: price,
-        image: image,
-        quantity: 1
-    };
+    let cartCount = document.getElementById("cartCount");
 
-    let exists = cart.find(item => item.name === name);
+    if(cartCount){
 
-    if(exists){
+        cartCount.innerText = cart.reduce((sum,item)=>{
+            return sum + item.quantity;
+        },0);
 
+    }
+
+
+    let cartItems = document.getElementById("cartItems");
+
+    let totalPrice = document.getElementById("cartTotalPrice");
+
+
+    if(cartItems){
+
+        cartItems.innerHTML = "";
+
+        let total = 0;
+
+
+        cart.forEach((item,index)=>{
+
+            total += item.price * item.quantity;
+
+
+            cartItems.innerHTML += `
+
+            <div class="cart-product">
+
+                <img src="${item.image}">
+
+                <h4>${item.name}</h4>
+
+                <p>${item.price} جنيه</p>
+
+
+                <button onclick="changeQuantity(${index},-1)">
+                    -
+                </button>
+
+
+                <span>
+                    ${item.quantity}
+                </span>
+
+
+                <button onclick="changeQuantity(${index},1)">
+                    +
+                </button>
+
+
+                <button onclick="removeCart(${index})">
+                    🗑️
+                </button>
+
+            </div>
+
+            `;
+
+        });
+
+
+        if(totalPrice){
+
+            totalPrice.innerText = total;
+
+        }
+
+    }
+
+}
+function changeQuantity(index,value){
+
+    cart[index].quantity += value;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    updateCart();
+
+}
         exists.quantity++;
 
     } else {
