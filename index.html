@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGstor | متجر الهدايا</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
-        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; gap: 10px; }
-        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
-        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
-        .cart-box { background: #fff; padding: 15px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 20px; }
-        .buy-btn { background: #25d366; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; margin-top: 10px; }
-        input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f4; margin: 0; padding: 10px; }
+        
+        /* الشريط العلوي */
+        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .nav-btn { background: #333; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap; font-weight: bold; }
+        .nav-btn:hover { background: #555; }
+
+        /* البطاقات */
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+        
+        /* السلة */
+        .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        
+        /* قائمة السلة */
+        ul { list-style: none; padding: 0; margin-top: 10px; }
+        li { margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .del-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -29,10 +41,10 @@
 
 <div class="cart-box">
     <h3>🛒 سلة طلباتك</h3>
-    <ul id="cart-list" style="text-align: right;"></ul>
-    <p>الإجمالي: <span id="total" style="color:red;">0</span> جنيه</p>
-    <input type="text" id="name" placeholder="الاسم">
-    <input type="text" id="phone" placeholder="رقم الهاتف">
+    <ul id="cart-list"></ul>
+    <p>الإجمالي: <span id="total" style="color:red; font-weight:bold;">0</span> جنيه</p>
+    <input type="text" id="name" placeholder="الاسم بالكامل">
+    <input type="tel" id="phone" placeholder="رقم الهاتف">
     <input type="text" id="address" placeholder="العنوان">
     <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
 </div>
@@ -49,20 +61,41 @@
 
 <script>
     let cart = []; let total = 0;
+
     function addItem(name, price) {
         cart.push({name, price});
         total += price;
+        renderCart();
+    }
+
+    function removeItem(index) {
+        total -= cart[index].price;
+        cart.splice(index, 1);
+        renderCart();
+    }
+
+    function renderCart() {
         let list = document.getElementById("cart-list");
-        list.innerHTML += `<li>${name} - ${price} جنيه</li>`;
+        list.innerHTML = "";
+        cart.forEach((item, index) => {
+            list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`;
+        });
         document.getElementById("total").innerText = total;
     }
+
     function filter(cat) {
         document.querySelectorAll('.card').forEach(item => {
             item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none";
         });
     }
+
     function sendOrder() {
-        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${document.getElementById('name').value}%0Aالهاتف: ${document.getElementById('phone').value}%0Aالعنوان: ${document.getElementById('address').value}`;
+        let name = document.getElementById('name').value;
+        let phone = document.getElementById('phone').value;
+        let addr = document.getElementById('address').value;
+        if(!name || !phone || !addr) { alert("يرجى ملء بيانات التوصيل!"); return; }
+        
+        let msg = `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} جنيه%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${addr}`;
         window.open("https://wa.me/201064031909?text=" + msg);
     }
 </script>
