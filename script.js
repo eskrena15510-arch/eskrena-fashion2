@@ -1,21 +1,36 @@
 // ===============================
-// MGstor Script
+// MGstor Full Script
 // ===============================
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("mg_cart")) || [];
 let favorites = [];
 
 
 // ===============================
-// فتح وقفل السلة
+// فتح وغلق السلة
 // ===============================
+
+function toggleCart(){
+
+    let box = document.getElementById("cartBox");
+
+    if(box){
+
+        box.classList.toggle("active");
+
+    }
+
+}
+
 
 function openCart(){
 
-    let cartBox = document.getElementById("cartBox");
+    let box = document.getElementById("cartBox");
 
-    if(cartBox){
-        cartBox.classList.add("active");
+    if(box){
+
+        box.classList.add("active");
+
     }
 
 }
@@ -23,22 +38,11 @@ function openCart(){
 
 function closeCart(){
 
-    let cartBox = document.getElementById("cartBox");
+    let box = document.getElementById("cartBox");
 
-    if(cartBox){
-        cartBox.classList.remove("active");
-    }
+    if(box){
 
-}
-
-
-function toggleCart(){
-
-    let cartBox = document.getElementById("cartBox");
-
-    if(cartBox){
-
-        cartBox.classList.toggle("active");
+        box.classList.remove("active");
 
     }
 
@@ -47,22 +51,19 @@ function toggleCart(){
 
 
 // ===============================
-// إضافة للسلة
+// إضافة منتج للسلة
 // ===============================
 
 function addToCart(name, price, image){
 
+    let oldProduct = cart.find(product => product.name === name);
 
-    let product = cart.find(item => item.name === name);
 
+    if(oldProduct){
 
-    if(product){
+        oldProduct.quantity++;
 
-        product.quantity++;
-
-    }
-
-    else{
+    }else{
 
         cart.push({
 
@@ -101,69 +102,71 @@ function updateCart(){
 
     if(count){
 
-        count.innerText = cart.reduce((a,b)=>a+b.quantity,0);
+        count.innerHTML = cart.reduce(
+            (total,item)=> total + item.quantity,
+            0
+        );
 
     }
 
 
 
-    let items = document.getElementById("cartItems");
+    let box = document.getElementById("cartItems");
 
 
-    let total = document.getElementById("cartTotalPrice");
+    let totalBox = document.getElementById("cartTotalPrice");
 
 
 
-    if(items){
+    if(box){
+
+        box.innerHTML = "";
 
 
-        items.innerHTML="";
-
-
-        let sum = 0;
+        let total = 0;
 
 
 
         cart.forEach((item,index)=>{
 
 
-            sum += item.price * item.quantity;
+            total += item.price * item.quantity;
 
 
 
-            items.innerHTML += `
+            box.innerHTML += `
 
             <div class="cart-product">
 
+                <img src="${item.image}" alt="${item.name}">
 
-                <img src="${item.image}">
+                <div>
 
+                    <h4>${item.name}</h4>
 
-                <h4>${item.name}</h4>
-
-
-                <p>${item.price} جنيه</p>
-
-
-                <button onclick="changeQuantity(${index},-1)">
-                -
-                </button>
+                    <p>${item.price} جنيه</p>
 
 
-                <span>
-                ${item.quantity}
-                </span>
+                    <button onclick="changeQuantity(${index},-1)">
+                    -
+                    </button>
 
 
-                <button onclick="changeQuantity(${index},1)">
-                +
-                </button>
+                    <span>
+                    ${item.quantity}
+                    </span>
 
 
-                <button onclick="removeCart(${index})">
-                🗑️
-                </button>
+                    <button onclick="changeQuantity(${index},1)">
+                    +
+                    </button>
 
+
+                    <button onclick="removeCart(${index})">
+                    ❌
+                    </button>
+
+                </div>
 
             </div>
 
@@ -174,21 +177,22 @@ function updateCart(){
 
 
 
-        if(total){
+        if(totalBox){
 
-            total.innerText=sum;
+            totalBox.innerHTML = total;
 
         }
 
 
     }
 
+
 }
 
 
 
 // ===============================
-// التحكم في الكمية
+// تغيير الكمية
 // ===============================
 
 function changeQuantity(index,value){
@@ -197,19 +201,16 @@ function changeQuantity(index,value){
     cart[index].quantity += value;
 
 
-
-    if(cart[index].quantity <=0){
+    if(cart[index].quantity <= 0){
 
         cart.splice(index,1);
 
     }
 
 
-
     saveCart();
 
     updateCart();
-
 
 }
 
@@ -229,13 +230,12 @@ function removeCart(index){
 
     updateCart();
 
-
 }
 
 
 
 // ===============================
-// حفظ البيانات
+// حفظ السلة
 // ===============================
 
 function saveCart(){
@@ -250,23 +250,59 @@ function saveCart(){
 
 
 // ===============================
-// تحميل السلة
+// تأكيد الطلب واتساب
 // ===============================
 
-window.onload=function(){
+function submitOrder(){
 
 
-    let oldCart = localStorage.getItem("mg_cart");
+    if(cart.length === 0){
 
+        showToast("السلة فارغة");
 
-    if(oldCart){
-
-        cart = JSON.parse(oldCart);
+        return;
 
     }
 
 
-    updateCart();
+
+    let message =
+    "طلب جديد من MGstor%0A%0A";
+
+
+
+    cart.forEach(item=>{
+
+
+        message +=
+        "المنتج: "+item.name+
+        "%0Aالسعر: "+item.price+
+        " جنيه%0Aالكمية: "+
+        item.quantity+
+        "%0A%0A";
+
+
+    });
+
+
+
+    let total = cart.reduce(
+        (sum,item)=>
+        sum+(item.price*item.quantity),
+        0
+    );
+
+
+
+    message +=
+    "الإجمالي: "+total+" جنيه";
+
+
+
+    window.open(
+        "https://wa.me/201000000000?text="+message,
+        "_blank"
+    );
 
 
 }
@@ -277,10 +313,12 @@ window.onload=function(){
 // Toast
 // ===============================
 
-function showToast(message){
+function showToast(text){
 
 
-    let toast=document.querySelector(".toast");
+    let toast =
+    document.querySelector(".toast");
+
 
 
     if(!toast){
@@ -294,7 +332,8 @@ function showToast(message){
     }
 
 
-    toast.innerText=message;
+
+    toast.innerHTML=text;
 
 
     toast.classList.add("show");
@@ -308,43 +347,15 @@ function showToast(message){
 
 
 }
-function submitOrder(){
-
-    if(cart.length === 0){
-
-        showToast("السلة فارغة");
-
-        return;
-
-    }
 
 
-    let message = "طلب جديد من MGstor%0A%0A";
 
+// ===============================
+// تشغيل عند فتح الموقع
+// ===============================
 
-    cart.forEach(item=>{
+window.addEventListener("load",()=>{
 
-        message += 
-        `المنتج: ${item.name}%0A`+
-        `السعر: ${item.price} جنيه%0A`+
-        `الكمية: ${item.quantity}%0A%0A`;
+    updateCart();
 
-    });
-
-
-    let total = cart.reduce((sum,item)=>{
-
-        return sum + (item.price * item.quantity);
-
-    },0);
-
-
-    message += "الإجمالي: " + total + " جنيه";
-
-
-    window.open(
-        "https://wa.me/201064031909?text=" + message,
-        "_blank"
-    );
-
-}
+});
