@@ -1,132 +1,807 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>MGstor | متجر الهدايا والإكسسوارات</title>
+
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
+
 <body>
 
 <header>
-    <div class="logo">🛍️ MGstor</div>
+
+    <div class="logo">
+        🛍️ MGstor
+    </div>
+
     <nav>
+
         <a href="#">الرئيسية</a>
+
         <a href="#products">المنتجات</a>
+
+        <a href="#offers">العروض</a>
+
         <a href="#about">من نحن</a>
+
         <a href="#contact">تواصل معنا</a>
+
     </nav>
+
 </header>
 
+
+
 <section class="hero">
-    <h1>مرحبًا بك في MGstor</h1>
-    <p>أفضل متجر للهدايا والإكسسوارات بأفضل الأسعار وأعلى جودة.</p>
-    <a class="btn" href="#products">تصفح المنتجات الآن</a>
+
+    <div class="hero-content">
+
+        <h1>
+            أفضل متجر للهدايا والإكسسوارات
+        </h1>
+
+        <p>
+
+            اكتشف أحدث الهدايا والإكسسوارات بأفضل جودة
+            وأفضل الأسعار داخل مصر.
+
+        </p>
+
+        <a href="#products" class="btn">
+
+            تسوق الآن
+
+        </a>
+
+    </div>
+
 </section>
+
+
+
+<section class="search-box">
+
+    <input
+
+        type="text"
+
+        id="searchInput"
+
+        placeholder="🔍 ابحث عن منتج..."
+
+        onkeyup="searchProducts()"
+
+    >
+
+</section>
+
+
+
+<section class="categories">
+
+    <button onclick="filterProducts('all')">
+
+        الكل
+
+    </button>
+
+    <button onclick="filterProducts('box')">
+
+        🎁 بوكسات
+
+    </button>
+
+    <button onclick="filterProducts('bracelet')">
+
+        📿 أساور
+
+    </button>
+
+    <button onclick="filterProducts('necklace')">
+
+        💎 سلاسل
+
+    </button>
+
+    <button onclick="filterProducts('ring')">
+
+        💍 خواتم
+
+    </button>
+
+    <button onclick="filterProducts('set')">
+
+        👑 أطقم
+
+    </button>
+
+</section>
+
+
+
+<section id="offers" class="offers">
+
+    <div class="offer">
+
+        <h2>
+
+            🔥 عروض الأسبوع
+
+        </h2>
+
+        <p>
+
+            خصومات حتى
+
+            <strong>
+
+                30%
+
+            </strong>
+
+            على منتجات مختارة.
+
+        </p>
+
+    </div>
+
+</section>
+
+
 
 <section id="products" class="products">
-    
-    <div class="card" onclick="addToCart('بوكس هدايا MGstor', 600)">
-        <div class="slider-container">
-            <img id="img-product-box" src="box1.png" alt="بوكس هدايا MGstor">
-            <button class="slide-btn prev" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], -1)">&#10094;</button>
-            <button class="slide-btn next" onclick="event.stopPropagation(); changeImage('img-product-box', ['box1.png', 'box2.png'], 1)">&#10095;</button>
-        </div>
-        <h3>🎁 بوكس هدايا MGstor (العرض الأقوى)</h3>
-        <p class="price">600 جنيه</p>
-        <p class="product-description">أقوى عرض هدايا متكامل ومميز! البوكس يحتوي على: طقم اسكوير استلس بيور الفاخر + 4 بورتريهات صغيرة + بورتريه كبير + شوكولاتة فاخرة.</p>
-        <button>أضف العرض للسلة 🛒</button>
+<!-- بوكس الهدايا -->
+
+<div class="card box" onclick="addToCart('بوكس هدايا MGstor',600)">
+
+    <span class="badge hot">🔥 الأكثر مبيعاً</span>
+
+    <span class="favorite">
+        ❤️
+    </span>
+
+    <div class="slider-container">
+
+        <img id="img-product-box" src="box1.png" alt="بوكس هدايا">
+
+        <button class="slide-btn prev"
+            onclick="event.stopPropagation();changeImage('img-product-box',['box1.png','box2.png'],-1)">
+            ❮
+        </button>
+
+        <button class="slide-btn next"
+            onclick="event.stopPropagation();changeImage('img-product-box',['box1.png','box2.png'],1)">
+            ❯
+        </button>
+
     </div>
 
-    <div class="card" onclick="addToCart('اسوره ايه الكرسي', 120)">
-        <div class="slider-container">
-            <img src="IMG_2822.jpeg" alt="اسوره ايه الكرسي">
-        </div>
-        <h3>اسوره ايه الكرسي</h3>
-        <p class="price">120 جنيه</p>
-        <p class="product-description">اسورة أنيقة ومميزة تحمل آية الكرسي بتصميم دقيق ومقاوم للصدأ.</p>
-        <button>أضف للسلة 🛒</button>
+    <div class="stars">
+        ⭐⭐⭐⭐⭐
     </div>
 
-    <div class="card" onclick="addToCart('سلسلة قلب مميزة', 150)">
-        <div class="slider-container">
-            <img src="IMG_2853.jpeg" alt="سلسله قلب مميزة">
-        </div>
-        <h3>سلسلة قلب مميزة</h3>
-        <p class="price">150 جنيه</p>
-        <p class="product-description">سلسلة على شكل قلوب صغيرة تجتمع مع بعضها بشكل رائع وجذاب.</p>
-        <button>أضف للسلة 🛒</button>
+    <h3>بوكس هدايا MGstor</h3>
+
+    <p class="price">
+        600 جنيه
+        <span class="old-price">
+            750
+        </span>
+    </p>
+
+    <p class="product-description">
+
+        طقم استلس فاخر +
+        بورتريه كبير +
+        4 بورتريهات صغيرة +
+        شوكولاتة فاخرة.
+
+    </p>
+
+    <button>
+
+        أضف للسلة 🛒
+
+    </button>
+
+</div>
+
+
+<!-- اسورة -->
+
+<div class="card bracelet"
+onclick="addToCart('اسورة آية الكرسي',120)">
+
+    <span class="badge new">
+        جديد
+    </span>
+
+    <span class="favorite">
+        ❤️
+    </span>
+
+    <img src="IMG_2822.jpeg">
+
+    <div class="stars">
+        ⭐⭐⭐⭐⭐
     </div>
 
-    <div class="card" onclick="addToCart('انسيال وسلسله  فان كليف', 150)">
-        <div class="slider-container">
-            <img src="انسيال فان كليڤ.JPG" alt="انسيال فان كليف">
-        </div>
-        <h3>انسيال وسلسله فان كليف</h3>
-        <p class="price">200 جنيه</p>
-        <p class="product-description">انسيال وسلسله فان كليف بتصميم عصري وأنيق مستوحي من الماركات العالمية.</p>
-        <button>أضف للسلة 🛒</button>
+    <h3>
+
+        اسورة آية الكرسي
+
+    </h3>
+
+    <p class="price">
+
+        120 جنيه
+
+    </p>
+
+    <p class="product-description">
+
+        استانلس ستيل مقاوم للصدأ
+        ضد المياه والعرق.
+
+    </p>
+
+    <button>
+
+        أضف للسلة 🛒
+
+    </button>
+
+</div>
+
+
+
+<!-- سلسلة قلب -->
+
+<div class="card necklace"
+onclick="addToCart('سلسلة قلب',150)">
+
+<span class="favorite">
+❤️
+</span>
+
+<img src="IMG_2853.jpeg">
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<h3>
+
+سلسلة قلب مميزة
+
+</h3>
+
+<p class="price">
+
+150 جنيه
+
+</p>
+
+<p class="product-description">
+
+ستانلس ستيل
+شكل راقي
+ألوان ثابتة.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+
+
+
+
+<!-- فان كليف -->
+
+<div class="card set"
+onclick="addToCart('طقم فان كليف',200)">
+
+<span class="badge hot">
+
+خصم
+
+</span>
+
+<span class="favorite">
+
+❤️
+
+</span>
+
+<img src="انسيال فان كليڤ.JPG">
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<h3>
+
+طقم فان كليف
+
+</h3>
+
+<p class="price">
+
+200 جنيه
+
+<span class="old-price">
+
+260
+
+</span>
+
+</p>
+
+<p class="product-description">
+
+طقم فاخر
+استانلس
+ألوان ثابتة.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+
+
+
+
+<!-- سلسلة حروف -->
+
+<div class="card necklace"
+onclick="addToCart('سلسلة حروف',150)">
+
+<span class="favorite">
+
+❤️
+
+</span>
+
+<img src="IMG_2823.jpeg">
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<h3>
+
+سلسلة حروف
+
+</h3>
+
+<p class="price">
+
+150 جنيه
+
+</p>
+
+<p class="product-description">
+
+عربي أو إنجليزي
+حسب اختيارك.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+<!-- خاتم أنت عمري -->
+
+<div class="card ring" onclick="addToCart('خاتم أنت عمري',250)">
+
+    <span class="badge new">💍 جديد</span>
+
+    <span class="favorite">❤️</span>
+
+    <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم">
+
+    <div class="stars">
+        ⭐⭐⭐⭐⭐
     </div>
 
-    <div class="card" onclick="addToCart('سلسله حروف عربي انجليزي استلس ', 150)">
-        <div class="slider-container">
-            <img src="IMG_2823.jpeg" alt="عربي وانجليزي سلسله حروف  استلس">
-        </div>
-        <h3> سلسله حروف عربي انجليزي استلس</h3>
-        <p class="price">150 جنيه</p>
-        <p class="product-description">مصنوع من الاستانلس ستيل الأصلي، يمكنك اختيار حرفك المفضل.</p>
-        <button>أضف للسلة 🛒</button>
-    </div>
+    <h3>خاتم (أنت عمري)</h3>
 
-    <div class="card" onclick="addToCart('خاتم (أنت عمري)', 250)">
-        <div class="slider-container">
-            <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم (أنت عمري)">
-        </div>
-        <h3>بالبوكس خاتم (أنت عمري)</h3>
-        <p class="price">250 جنيه</p>
-        <p class="product-description">خاتم فضي فاخر محفور عليه جملة (أنت عمري) بخط عربي +البوكس أصيل.</p>
-        <button>أضف للسلة 🛒</button>
-    </div>
+    <p class="price">
+        250 جنيه
+    </p>
+
+    <p class="product-description">
+        خاتم فاخر داخل بوكس هدايا مميز محفور عليه (أنت عمري).
+    </p>
+
+    <button>أضف للسلة 🛒</button>
+
+</div>
+
+
+
+<!-- اسورة كارتير -->
+
+<div class="card bracelet" onclick="addToCart('اسورة كارتير',180)">
+
+<span class="badge hot">🔥</span>
+
+<span class="favorite">❤️</span>
+
+<img src="cartier.jpg">
+
+<div class="stars">⭐⭐⭐⭐⭐</div>
+
+<h3>اسورة كارتير</h3>
+
+<p class="price">180 جنيه</p>
+
+<p class="product-description">
+
+ستانلس ستيل
+ألوان ثابتة
+ضد الصدأ.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+
+
+
+<!-- سلسلة أسماء -->
+
+<div class="card necklace" onclick="addToCart('سلسلة أسماء',170)">
+
+<span class="favorite">❤️</span>
+
+<img src="name.jpg">
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<h3>
+
+سلسلة أسماء
+
+</h3>
+
+<p class="price">
+
+170 جنيه
+
+</p>
+
+<p class="product-description">
+
+اكتب اسمك بالعربي
+أو الإنجليزي.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+
+
+
+<!-- طقم هدايا -->
+
+<div class="card set" onclick="addToCart('طقم هدايا',350)">
+
+<span class="badge new">
+
+🎁 جديد
+
+</span>
+
+<span class="favorite">
+
+❤️
+
+</span>
+
+<img src="gift.jpg">
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<h3>
+
+طقم هدايا
+
+</h3>
+
+<p class="price">
+
+350 جنيه
+
+</p>
+
+<p class="product-description">
+
+طقم كامل مناسب
+للمناسبات والهدايا.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
+
+
+
+<!-- ميدالية -->
+
+<div class="card accessories" onclick="addToCart('ميدالية صور',120)">
+
+<span class="favorite">❤️</span>
+
+<img src="keychain.jpg">
+
+<div class="stars">⭐⭐⭐⭐⭐</div>
+
+<h3>
+
+ميدالية صور
+
+</h3>
+
+<p class="price">
+
+120 جنيه
+
+</p>
+
+<p class="product-description">
+
+ميدالية مطبوع عليها
+صورتك الخاصة.
+
+</p>
+
+<button>
+
+أضف للسلة 🛒
+
+</button>
+
+</div>
 
 </section>
+<!-- ===================== -->
+<!-- سلة المشتريات -->
+<!-- ===================== -->
 
 <div class="cart-box">
+
     <button class="cart-btn" onclick="toggleCart()">
-        🛒 السلة (<span id="cart-count">0</span>)
+
+        🛒 السلة
+
+        (<span id="cart-count">0</span>)
+
     </button>
 
     <div id="cart" class="cart hidden">
-        <h3>🛒 سلة المشتريات</h3>
-        <ul id="cart-items"></ul>
+
+        <h3>
+
+            سلة المشتريات
+
+        </h3>
+
+        <ul id="cart-items">
+
+        </ul>
+
         <div class="cart-total">
-            إجمالي الحساب: <span id="cart-total-price">0</span> جنيه
+
+            الإجمالي :
+
+            <span id="cart-total-price">
+
+                0
+
+            </span>
+
+            جنيه
+
         </div>
-        
-        <div id="checkout-form" class="checkout-form">
-            <h4>📋 بيانات الشحن والتوصيل</h4>
-            <input type="text" id="client-name" placeholder="الاسم الكامل" required>
-            <input type="tel" id="client-phone" placeholder="رقم الهاتف (واتساب)" required>
-            <input type="text" id="client-address" placeholder="العنوان بالتفصيل" required>
-            <input type="text" id="client-city" placeholder="المحافظة" required>
-            <button class="checkout-btn" onclick="submitOrder()">تأكيد وإرسال الطلب عبر واتساب 💬</button>
+
+        <div class="checkout-form">
+
+            <h4>
+
+                بيانات العميل
+
+            </h4>
+
+            <input
+                id="client-name"
+                type="text"
+                placeholder="الاسم بالكامل"
+            >
+
+            <input
+                id="client-phone"
+                type="tel"
+                placeholder="رقم الهاتف"
+            >
+
+            <input
+                id="client-address"
+                type="text"
+                placeholder="العنوان"
+            >
+
+            <input
+                id="client-city"
+                type="text"
+                placeholder="المحافظة"
+            >
+
+            <button
+                class="checkout-btn"
+                onclick="submitOrder()">
+
+                تأكيد الطلب عبر واتساب
+
+            </button>
+
         </div>
-        <button class="close-btn" onclick="toggleCart()">إغلاق السلة</button>
+
+        <button
+            class="close-btn"
+            onclick="toggleCart()">
+
+            إغلاق
+
+        </button>
+
     </div>
+
 </div>
 
+
+<!-- ===================== -->
+<!-- من نحن -->
+<!-- ===================== -->
+
 <section id="about">
-    <h2>من نحن</h2>
-    <p>MGstor متجر متخصص في بيع الهدايا والإكسسوارات الراقية بأفضل الأسعار.</p>
+
+    <h2>
+
+        من نحن
+
+    </h2>
+
+    <p>
+
+        MGstor هو متجر متخصص في الهدايا
+        والإكسسوارات المصنوعة بجودة عالية
+        وبأسعار مناسبة للجميع.
+
+    </p>
+
 </section>
 
+
+<!-- ===================== -->
+<!-- الفوتر -->
+<!-- ===================== -->
+
 <footer id="contact">
-    <h3>MGstor</h3>
-    <p>للطلب والاستفسار المباشر</p>
-    <a class="btn" href="https://wa.me/201064031909" target="_blank">راسلنا على واتساب</a>
-    <p style="margin-top:20px; font-size: 0.9rem; color: #bbb;">© 2026 MGstor. جميع الحقوق محفوظة.</p>
+
+    <h2>
+
+        MGstor
+
+    </h2>
+
+    <p>
+
+        شكراً لزيارتكم متجرنا ❤️
+
+    </p>
+
+    <div class="footer-links">
+
+        <a href="#">
+
+            الرئيسية
+
+        </a>
+
+        <a href="#products">
+
+            المنتجات
+
+        </a>
+
+        <a href="#about">
+
+            من نحن
+
+        </a>
+
+        <a href="https://wa.me/201064031909" target="_blank">
+
+            واتساب
+
+        </a>
+
+    </div>
+
+    <a
+        class="btn"
+        href="https://wa.me/201064031909"
+        target="_blank">
+
+        اطلب الآن
+
+    </a>
+
+    <p class="copyright">
+
+        © 2026 MGstor جميع الحقوق محفوظة
+
+    </p>
+
 </footer>
 
+
 <script src="script.js"></script>
+
 </body>
+
 </html>
