@@ -1,72 +1,65 @@
-<div class="products-grid" id="products">
-    <!-- أسورة كابلز 1 -->
-    <div class="product-card">
-        <img src="IMG_3010.jpeg" alt="أسورة كابلز 1">
-        <h3>أسورة كابلز 1</h3>
-        <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button>
-    </div>
-    <!-- أسورة كابلز 2 -->
-    <div class="product-card">
-        <img src="IMG_3011.jpeg" alt="أسورة كابلز 2">
-        <h3>أسورة كابلز 2</h3>
-        <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button>
-    </div>
-    <!-- أسورة كابلز 3 -->
-    <div class="product-card">
-        <img src="IMG_3014.jpeg" alt="أسورة كابلز 3">
-        <h3>أسورة كابلز 3</h3>
-        <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة كابلز 3', 150)">أضف للسلة</button>
-    </div>
-    <!-- بوكس هدايا -->
-    <div class="product-card">
-        <img src="box1.png" alt="بوكس هدايا">
-        <h3>بوكس هدايا</h3>
-        <p>600 جنيه</p>
-        <button class="btn-add" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button>
-    </div>
-    <!-- أسورة آية الكرسي -->
-    <div class="product-card">
-        <img src="IMG_2822.jpeg" alt="أسورة آية الكرسي">
-        <h3>أسورة آية الكرسي</h3>
-        <p>120 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة</button>
-    </div>
-    <!-- أسورة كارتير -->
-    <div class="product-card">
-        <img src="cartier.jpg" alt="أسورة كارتير">
-        <h3>أسورة كارتير</h3>
-        <p>180 جنيه</p>
-        <button class="btn-add" onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button>
-    </div>
-    <!-- سلسلة قلب -->
-    <div class="product-card">
-        <img src="IMG_2853.jpeg" alt="سلسلة قلب">
-        <h3>سلسلة قلب</h3>
-        <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button>
-    </div>
-    <!-- سلسلة حروف -->
-    <div class="product-card">
-        <img src="IMG_2823.jpeg" alt="سلسلة حروف">
-        <h3>سلسلة حروف</h3>
-        <p>150 جنيه</p>
-        <button class="btn-add" onclick="addItem('سلسلة حروف', 150)">أضف للسلة</button>
-    </div>
-    <!-- سلسلة أسماء -->
-    <div class="product-card">
-        <img src="name.jpg" alt="سلسلة أسماء">
-        <h3>سلسلة أسماء</h3>
-        <p>170 جنيه</p>
-        <button class="btn-add" onclick="addItem('سلسلة أسماء', 170)">أضف للسلة</button>
-    </div>
-    <!-- خاتم أنت عمري -->
-    <div class="product-card">
-        <img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg" alt="خاتم أنت عمري">
-        <h3>خاتم أنت عمري</h3>
-        <p>250 جنيه</p>
-        <button class="btn-add" onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة</button>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>MGstor</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 15px; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card img { width: 100%; max-width: 350px; border-radius: 10px; margin-bottom: 15px; }
+        .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        .add-btn { background: #333; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">MGstor 🎁</h1>
+
+<div class="cart-box">
+    <h3>🛒 سلة طلباتك</h3>
+    <ul id="cart-list"></ul>
+    <p>الإجمالي: <span id="total" style="color:red; font-weight:bold;">0</span> ج</p>
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="tel" id="phone" placeholder="الهاتف">
+    <input type="text" id="address" placeholder="العنوان">
+    <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
 </div>
+
+<div id="products">
+    <div class="card"><img src="IMG_3010.jpeg"><h3>أسورة كابلز 1</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button></div>
+    <div class="card"><img src="IMG_3011.jpeg"><h3>أسورة كابلز 2</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button></div>
+    <div class="card"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 ج</p><button class="add-btn" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
+    <div class="card"><img src="IMG_2822.jpeg"><h3>أسورة آية الكرسي</h3><p>120 ج</p><button class="add-btn" onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card"><img src="cartier.jpg"><h3>أسورة كارتير</h3><p>180 ج</p><button class="add-btn" onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button></div>
+    <div class="card"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 ج</p><button class="add-btn" onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button></div>
+    <div class="card"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 ج</p><button class="add-btn" onclick="addItem('سلسلة حروف', 150)">أضف للسلة</button></div>
+    <div class="card"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 ج</p><button class="add-btn" onclick="addItem('سلسلة أسماء', 170)">أضف للسلة</button></div>
+    <div class="card"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 ج</p><button class="add-btn" onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة</button></div>
+    <div class="card"><img src="ring1.jpg"><h3>خاتم ذهبي</h3><p>300 ج</p><button class="add-btn" onclick="addItem('خاتم ذهبي', 300)">أضف للسلة</button></div>
+    <div class="card"><img src="ring2.jpg"><h3>خاتم مرصع</h3><p>350 ج</p><button class="add-btn" onclick="addItem('خاتم مرصع', 350)">أضف للسلة</button></div>
+    <div class="card"><img src="ring3.jpg"><h3>خاتم فضة</h3><p>280 ج</p><button class="add-btn" onclick="addItem('خاتم فضة', 280)">أضف للسلة</button></div>
+    <div class="card"><img src="ring4.jpg"><h3>خاتم خطوبة</h3><p>400 ج</p><button class="add-btn" onclick="addItem('خاتم خطوبة', 400)">أضف للسلة</button></div>
+    <div class="card"><img src="chain1.jpg"><h3>سلسلة لؤلؤ</h3><p>200 ج</p><button class="add-btn" onclick="addItem('سلسلة لؤلؤ', 200)">أضف للسلة</button></div>
+    <div class="card"><img src="chain2.jpg"><h3>سلسلة دلاية</h3><p>180 ج</p><button class="add-btn" onclick="addItem('سلسلة دلاية', 180)">أضف للسلة</button></div>
+    <div class="card"><img src="chain3.jpg"><h3>سلسلة مرصعة</h3><p>250 ج</p><button class="add-btn" onclick="addItem('سلسلة مرصعة', 250)">أضف للسلة</button></div>
+</div>
+
+<script>
+    let cart = []; let total = 0;
+    function addItem(n, p) { cart.push({name: n, price: p}); total += p; renderCart(); }
+    function renderCart() { 
+        let list = document.getElementById("cart-list"); list.innerHTML = ""; 
+        cart.forEach((item) => { list.innerHTML += `<li>${item.name} (${item.price} ج)</li>`; }); 
+        document.getElementById("total").innerText = total; 
+    }
+    function sendOrder() { 
+        let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; 
+        if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; } 
+        window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`); 
+    }
+</script>
+</body>
+</html>
