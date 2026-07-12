@@ -6,32 +6,20 @@
     <title>MGstor | متجر أنيق</title>
     <style>
         :root {
-            --primary: #25d366; /* أخضر الواتساب */
-            --dark: #2c3e50;    /* كحلي غامق فخم */
-            --light: #f4f7f6;   /* رمادي فاتح للخلفية */
-            --accent: #e74c3c;  /* أحمر للتنبيهات والأسعار */
+            --primary: #25d366; --dark: #2c3e50; --light: #f4f7f6; --accent: #e74c3c;
         }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--light); margin: 0; padding: 10px; }
-        
-        /* شريط الفلتر الملون */
         .nav-bar { display: flex; overflow-x: auto; padding-bottom: 15px; gap: 10px; }
-        .nav-btn { background: white; border: 2px solid var(--dark); color: var(--dark); padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .nav-btn:active, .nav-btn:hover { background: var(--dark); color: white; }
-
-        /* كروت المنتجات */
+        .nav-btn { background: white; border: 2px solid var(--dark); color: var(--dark); padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .nav-btn:active { background: var(--dark); color: white; }
         .card { background: white; padding: 20px; border-radius: 25px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid var(--primary); }
         .card img { width: 100%; max-height: 350px; object-fit: contain; border-radius: 15px; margin-bottom: 15px; }
         .card h3 { color: var(--dark); font-size: 19px; margin: 10px 0; }
         .card p { color: var(--accent); font-size: 17px; font-weight: bold; }
-        
-        /* الأزرار والسلة */
-        .add-btn { background: var(--dark); color: white; border: none; padding: 12px 35px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .add-btn:hover { background: var(--primary); }
-        
+        .add-btn { background: var(--dark); color: white; border: none; padding: 12px 35px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; }
         .cart-box { background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--primary); margin-bottom: 30px; }
         .buy-btn { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; }
         input { width: 100%; padding: 14px; margin: 8px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
-        h1 { color: var(--dark); text-align: center; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -47,21 +35,33 @@
 </div>
 
 <div class="cart-box">
-    <h3 style="color:var(--dark);">🛒 سلة طلباتك</h3>
+    <h3>🛒 سلة طلباتك</h3>
     <ul id="cart-list" style="list-style:none; padding:0;"></ul>
     <p>الإجمالي: <span id="total" style="color:var(--accent); font-size:20px; font-weight:bold;">0</span> ج</p>
-    <input type="text" id="name" placeholder="الاسم الكريم">
-    <input type="tel" id="phone" placeholder="رقم الهاتف">
-    <input type="text" id="address" placeholder="العنوان بالتفصيل">
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="tel" id="phone" placeholder="الهاتف">
+    <input type="text" id="address" placeholder="العنوان">
     <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
 </div>
 
 <div id="products">
-    <!-- المنتجات بنفس التنسيق السابق -->
     <div class="card bracelet"><img src="IMG_3010.jpeg"><h3>أسورة كابلز 1</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 1', 150)">أضف للسلة</button></div>
     <div class="card bracelet"><img src="IMG_3011.jpeg"><h3>أسورة كابلز 2</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 2', 150)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="IMG_3014.jpeg"><h3>أسورة كابلز 3</h3><p>150 ج</p><button class="add-btn" onclick="addItem('أسورة كابلز 3', 150)">أضف للسلة</button></div>
     <div class="card box"><img src="box1.png"><h3>بوكس هدايا</h3><p>600 ج</p><button class="add-btn" onclick="addItem('بوكس هدايا', 600)">أضف للسلة</button></div>
-    <!-- يمكنك إكمال باقي المنتجات بنفس الطريقة -->
+    <div class="card bracelet"><img src="IMG_2822.jpeg"><h3>أسورة آية الكرسي</h3><p>120 ج</p><button class="add-btn" onclick="addItem('أسورة آية الكرسي', 120)">أضف للسلة</button></div>
+    <div class="card bracelet"><img src="cartier.jpg"><h3>أسورة كارتير</h3><p>180 ج</p><button class="add-btn" onclick="addItem('أسورة كارتير', 180)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2853.jpeg"><h3>سلسلة قلب</h3><p>150 ج</p><button class="add-btn" onclick="addItem('سلسلة قلب', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="IMG_2823.jpeg"><h3>سلسلة حروف</h3><p>150 ج</p><button class="add-btn" onclick="addItem('سلسلة حروف', 150)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="name.jpg"><h3>سلسلة أسماء</h3><p>170 ج</p><button class="add-btn" onclick="addItem('سلسلة أسماء', 170)">أضف للسلة</button></div>
+    <div class="card ring"><img src="e53e03a6-5241-45fa-85c7-8e0f53ae457c.jpeg"><h3>خاتم أنت عمري</h3><p>250 ج</p><button class="add-btn" onclick="addItem('خاتم أنت عمري', 250)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring1.jpg"><h3>خاتم ذهبي</h3><p>300 ج</p><button class="add-btn" onclick="addItem('خاتم ذهبي', 300)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring2.jpg"><h3>خاتم مرصع</h3><p>350 ج</p><button class="add-btn" onclick="addItem('خاتم مرصع', 350)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring3.jpg"><h3>خاتم فضة</h3><p>280 ج</p><button class="add-btn" onclick="addItem('خاتم فضة', 280)">أضف للسلة</button></div>
+    <div class="card ring"><img src="ring4.jpg"><h3>خاتم خطوبة</h3><p>400 ج</p><button class="add-btn" onclick="addItem('خاتم خطوبة', 400)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain1.jpg"><h3>سلسلة لؤلؤ</h3><p>200 ج</p><button class="add-btn" onclick="addItem('سلسلة لؤلؤ', 200)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain2.jpg"><h3>سلسلة دلاية</h3><p>180 ج</p><button class="add-btn" onclick="addItem('سلسلة دلاية', 180)">أضف للسلة</button></div>
+    <div class="card necklace"><img src="chain3.jpg"><h3>سلسلة مرصعة</h3><p>250 ج</p><button class="add-btn" onclick="addItem('سلسلة مرصعة', 250)">أضف للسلة</button></div>
 </div>
 
 <script>
@@ -70,7 +70,7 @@
     function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
     function renderCart() { 
         let list = document.getElementById("cart-list"); list.innerHTML = ""; 
-        cart.forEach((item, index) => { list.innerHTML += `<li style="padding:10px 0; border-bottom:1px solid #eee;">${item.name} - ${item.price} ج <button onclick="removeItem(${index})" style="background:none; border:none; color:var(--accent); cursor:pointer;">✕</button></li>`; }); 
+        cart.forEach((item, index) => { list.innerHTML += `<li style="padding:10px 0; border-bottom:1px solid #eee;">${item.name} (${item.price} ج) <button onclick="removeItem(${index})" style="background:none; border:none; color:red; cursor:pointer;">✕</button></li>`; }); 
         document.getElementById("total").innerText = total; 
     }
     function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
