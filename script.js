@@ -1,109 +1,387 @@
+// ===============================
+// MGstor V2
+// ===============================
+
 let cart = [];
+let favorites = [];
 
-function changeImage(imgId, imgArray, direction) {
-    const imgElement = document.getElementById(imgId);
-    let currentSrc = imgElement.src.split('/').pop();
-    currentSrc = decodeURIComponent(currentSrc);
-    
-    let currentIndex = imgArray.indexOf(currentSrc);
-    if (currentIndex === -1) currentIndex = 0;
-    
-    currentIndex += direction;
-    
-    if (currentIndex >= imgArray.length) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = imgArray.length - 1;
-    
-    imgElement.src = imgArray[currentIndex];
+// ===============================
+// تغيير صور المنتج
+// ===============================
+
+function changeImage(imgId, images, direction) {
+
+    const img = document.getElementById(imgId);
+
+    if (!img) return;
+
+    let current = images.indexOf(img.src.split("/").pop());
+
+    if (current === -1) current = 0;
+
+    current += direction;
+
+    if (current >= images.length) current = 0;
+
+    if (current < 0) current = images.length - 1;
+
+    img.src = images[current];
+
 }
 
-function addToCart(name, price) {
-    let item = cart.find(i => i.name === name);
-    if (item) {
-        item.quantity += 1;
+// ===============================
+// البحث
+// ===============================
+
+function searchProducts() {
+
+    let input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        let title = card
+            .querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+        if (title.includes(input)) {
+
+            card.style.display = "flex";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+// ===============================
+// الفلترة
+// ===============================
+
+function filterProducts(type){
+
+    let cards=document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        if(type==="all"){
+
+            card.style.display="flex";
+
+            return;
+
+        }
+
+        if(card.classList.contains(type)){
+
+            card.style.display="flex";
+
+        }
+
+        else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+}
+
+// ===============================
+// المفضلة
+// ===============================
+
+document.addEventListener("click",function(e){
+
+    if(e.target.classList.contains("favorite")){
+
+        e.target.classList.toggle("active");
+
+    }
+
+});
+
+// ===============================
+// Toast
+// ===============================
+
+function showToast(message){
+
+    let toast=document.querySelector(".toast");
+
+    if(!toast){
+
+        toast=document.createElement("div");
+
+        toast.className="toast";
+
+        document.body.appendChild(toast);
+
+    }
+
+    toast.innerText=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+// ===============================
+// السلة
+// ===============================
+
+function addToCart(name, price, image){
+
+    let product = {
+        name: name,
+        price: price,
+        image: image,
+        quantity: 1
+    };
+
+    let exists = cart.find(item => item.name === name);
+
+    if(exists){
+
+        exists.quantity++;
+
     } else {
-        cart.push({ name: name, price: price, quantity: 1 });
+
+        cart.push(product);
+
     }
-    updateCartUI();
-    alert(`تم إضافة "${name}" إلى السلة بنجاح!`);
+
+    updateCart();
+
+    showToast("تم إضافة المنتج للسلة 🛒");
+
 }
 
-// تعديل دالة بناء السلة لإضافة زر الـ X المطور للحذف من نفس المكان
-function updateCartUI() {
-    const cartItems = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotalPrice = document.getElementById('cart-total-price');
-    
-    cartItems.innerHTML = '';
-    let totalItems = 0;
-    let totalPrice = 0;
 
-    cart.forEach((item, index) => {
-        totalItems += item.quantity;
-        totalPrice += (item.price * item.quantity);
+// ===============================
+// تحديث السلة
+// ===============================
 
-        let li = document.createElement('li');
-        li.innerHTML = `
-            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
-                <span style="font-weight: 600; color: #000;">${item.name}</span>
-                <span style="font-size: 0.85rem; color: #666;">الكمية: ${item.quantity} × ${item.price} ج.م</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-weight: 700; color: #ff4a7a;">${item.price * item.quantity} ج.م</span>
-                <button onclick="event.stopPropagation(); removeFromCart(${index})" 
-                        style="background: #ff4d4d; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;"
-                        title="مسح من السلة">
-                    ✕
+function updateCart(){
+
+    let cartCount = document.getElementById("cartCount");
+
+    if(cartCount){
+
+        let total = cart.reduce((sum,item)=>{
+
+            return sum + item.quantity;
+
+        },0);
+
+        cartCount.innerText = total;
+
+    }
+
+
+    let cartItems = document.getElementById("cartItems");
+
+    if(cartItems){
+
+        cartItems.innerHTML="";
+
+
+        cart.forEach((item,index)=>{
+
+            cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <img src="${item.image}">
+
+                <div>
+
+                    <h4>${item.name}</h4>
+
+                    <p>${item.price} جنيه</p>
+
+                    <span>
+                    الكمية: ${item.quantity}
+                    </span>
+
+                </div>
+
+
+                <button onclick="removeCart(${index})">
+                    ❌
                 </button>
+
             </div>
-        `;
-        cartItems.appendChild(li);
-    });
 
-    cartCount.innerText = totalItems;
-    cartTotalPrice.innerText = totalPrice;
-}
+            `;
 
-// دالة مسح المنتج المباشر وإعادة الحساب فوراً
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-}
+        });
 
-function toggleCart() {
-    const cartDiv = document.getElementById('cart');
-    cartDiv.classList.toggle('hidden');
-}
-
-function submitOrder() {
-    if (cart.length === 0) {
-        alert('سلتك فارغة!');
-        return;
     }
 
-    const name = document.getElementById('client-name').value.trim();
-    const phone = document.getElementById('client-phone').value.trim();
-    const address = document.getElementById('client-address').value.trim();
-    const city = document.getElementById('client-city').value.trim();
+}
 
-    if (!name || !phone || !address || !city) {
-        alert('من فضلك قم بملء جميع بيانات الشحن لإتمام طلبك!');
-        return;
+
+// ===============================
+// حذف من السلة
+// ===============================
+
+function removeCart(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+    showToast("تم حذف المنتج");
+
+}
+
+
+// ===============================
+// فتح وإغلاق السلة
+// ===============================
+
+function openCart(){
+
+    let box=document.getElementById("cartBox");
+
+    if(box){
+
+        box.classList.add("active");
+
     }
 
-    let phoneNumber = "201064031909";
-    let message = "🛍️ *طلب جديد من متجر MGstor* 🛍️\n\n";
-    message += "👤 *بيانات العميل:*\n";
-    message += `- الاسم: ${name}\n- الهاتف: ${phone}\n- العنوان: ${address}\n- المحافظة: ${city}\n\n`;
-    
-    message += "🛒 *المنتجات المطلوبة:*\n";
-    let totalPrice = 0;
-    cart.forEach(item => {
-        message += `- ${item.name} (الكمية: ${item.quantity}) -> ${item.price * item.quantity} ج.م\n`;
-        totalPrice += (item.price * item.quantity);
-    });
-
-    message += `\n💰 *إجمالي الحساب:* ${totalPrice} جنيه مصري`;
-    
-    let encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
 }
+
+
+function closeCart(){
+
+    let box=document.getElementById("cartBox");
+
+    if(box){
+
+        box.classList.remove("active");
+
+    }
+
+}
+// ===============================
+// المفضلة
+// ===============================
+
+function addFavorite(name){
+
+    if(!favorites.includes(name)){
+
+        favorites.push(name);
+
+        showToast("تمت الإضافة للمفضلة ❤️");
+
+    }
+
+    else{
+
+        favorites = favorites.filter(item => item !== name);
+
+        showToast("تم الحذف من المفضلة");
+
+    }
+
+}
+
+
+// ===============================
+// فتح تفاصيل المنتج
+// ===============================
+
+function openProduct(id){
+
+    window.location.href = "product.html?id=" + id;
+
+}
+
+
+// ===============================
+// زر القائمة في الموبايل
+// ===============================
+
+function toggleMenu(){
+
+    let menu=document.querySelector(".menu");
+
+    if(menu){
+
+        menu.classList.toggle("active");
+
+    }
+
+}
+
+
+// ===============================
+// حفظ السلة والمفضلة
+// ===============================
+
+window.addEventListener("beforeunload",()=>{
+
+    localStorage.setItem(
+        "mg_cart",
+        JSON.stringify(cart)
+    );
+
+
+    localStorage.setItem(
+        "mg_favorites",
+        JSON.stringify(favorites)
+    );
+
+});
+
+
+// ===============================
+// تحميل البيانات
+// ===============================
+
+window.addEventListener("load",()=>{
+
+
+    let savedCart =
+    localStorage.getItem("mg_cart");
+
+
+    let savedFav =
+    localStorage.getItem("mg_favorites");
+
+
+    if(savedCart){
+
+        cart = JSON.parse(savedCart);
+
+    }
+
+
+    if(savedFav){
+
+        favorites = JSON.parse(savedFav);
+
+    }
+
+
+    updateCart();
+
+
+});
