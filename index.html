@@ -2,25 +2,33 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>MGstor | المتجر</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGstor | متجر موبايل احترافي</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 15px; }
-        .nav-bar { display: flex; overflow-x: auto; background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; gap: 10px; }
-        .nav-btn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        /* هنا التعديل: الصور أصبحت أكبر وأوضح */
-        .card img { width: 100%; max-width: 500px; height: auto; border-radius: 15px; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; }
-        .cart-box { background: #fff; padding: 20px; border: 2px dashed #25d366; border-radius: 15px; margin-bottom: 30px; }
-        .buy-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
-        .del-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
-        .add-btn { background: #333; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        body { font-family: sans-serif; background-color: #f7f7f7; margin: 0; padding: 10px; }
+        
+        /* شريط الفلتر المريح للموبايل */
+        .nav-bar { display: flex; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; gap: 8px; }
+        .nav-btn { background: #fff; border: 1px solid #ddd; padding: 10px 20px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 14px; }
+        .nav-btn:active { background: #333; color: #fff; }
+
+        /* الكروت الكبيرة للمنتجات */
+        .card { background: white; padding: 20px; border-radius: 25px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: center; }
+        .card img { width: 100%; max-height: 350px; object-fit: contain; border-radius: 20px; margin-bottom: 15px; background: #fafafa; }
+        .card h3 { font-size: 18px; margin: 10px 0; }
+        .card p { font-size: 16px; color: #e74c3c; font-weight: bold; margin-bottom: 15px; }
+        
+        /* أزرار الموبايل */
+        .add-btn { background: #333; color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .cart-box { background: #fff; padding: 25px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .buy-btn { background: #25d366; color: white; border: none; padding: 18px; width: 100%; border-radius: 15px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #eee; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
+        li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
     </style>
 </head>
 <body>
 
-<h1 style="text-align:center;">MGstor 🎁</h1>
+<h1 style="text-align:center; margin-bottom:20px;">MGstor 🎁</h1>
 
 <div class="nav-bar">
     <button class="nav-btn" onclick="filter('all')">الكل</button>
@@ -32,11 +40,11 @@
 
 <div class="cart-box">
     <h3>🛒 سلة طلباتك</h3>
-    <ul id="cart-list"></ul>
-    <p>الإجمالي: <span id="total" style="color:red; font-weight:bold;">0</span> ج</p>
-    <input type="text" id="name" placeholder="الاسم">
-    <input type="tel" id="phone" placeholder="الهاتف">
-    <input type="text" id="address" placeholder="العنوان">
+    <ul id="cart-list" style="list-style:none; padding:0;"></ul>
+    <p>الإجمالي: <span id="total" style="color:red; font-size:20px; font-weight:bold;">0</span> ج</p>
+    <input type="text" id="name" placeholder="الاسم الكريم">
+    <input type="tel" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="address" placeholder="العنوان بالتفصيل">
     <button class="buy-btn" onclick="sendOrder()">إرسال الطلب واتساب 📲</button>
 </div>
 
@@ -65,14 +73,14 @@
     function removeItem(i) { total -= cart[i].price; cart.splice(i, 1); renderCart(); }
     function renderCart() { 
         let list = document.getElementById("cart-list"); list.innerHTML = ""; 
-        cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} (${item.price} ج) <button class="del-btn" onclick="removeItem(${index})">حذف</button></li>`; }); 
+        cart.forEach((item, index) => { list.innerHTML += `<li>${item.name} - ${item.price} ج <button onclick="removeItem(${index})" style="background:none; border:none; color:red;">✕</button></li>`; }); 
         document.getElementById("total").innerText = total; 
     }
     function filter(cat) { document.querySelectorAll('.card').forEach(item => { item.style.display = (cat === 'all' || item.classList.contains(cat)) ? "block" : "none"; }); }
     function sendOrder() { 
         let n = document.getElementById('name').value; let ph = document.getElementById('phone').value; let ad = document.getElementById('address').value; 
-        if(!n || !ph || !ad) { alert("أكمل البيانات!"); return; } 
-        window.open("https://wa.me/201064031909?text=" + `طلب جديد:%0Aالمنتجات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}`); 
+        if(!n || !ph || !ad) { alert("من فضلك أكمل بياناتك!"); return; } 
+        window.open("https://wa.me/201064031909?text=" + `طلب جديد من MGstor:%0Aالاسم: ${n}%0Aالهاتف: ${ph}%0Aالعنوان: ${ad}%0Aالطلبات: ${cart.map(i => i.name).join(', ')}%0Aالإجمالي: ${total} ج`); 
     }
 </script>
 </body>
